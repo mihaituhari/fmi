@@ -1,0 +1,32 @@
+# General
+*.o
+*.obj
+*.log
+*.tmp
+*.temp
+*.gz
+*.DS_Store
+*.out
+*.a
+*.lib
+*.so
+*.dylib
+*.exe
+
+# CLion specific
+.idea/
+cmake-build-debug/
+cmake-build-release/
+cmake-build-*/   # Ignore any custom build directories
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CMakeLists.txt.user
+
+# Build files
+Makefile
+build/
+bin/
+lib/
