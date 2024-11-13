@@ -3,4 +3,4 @@ project(ts)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(ts main.cpp)
+add_executable(ts monte-carlo-zaruri/main.cpp)
