@@ -16,4 +16,4 @@ Vedeti fisierul [monte-carlo-zaruri/main.cpp](main.cpp) pentru codul sursa.
 
 #### Compilare si rulare
 Rezultatul compilarii si rularii programului este:
-![screenshot](screenshot.png)
+![result](result.png)
