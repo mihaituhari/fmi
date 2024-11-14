@@ -1,4 +1,5 @@
 ## Tema 2 / Primitive grafice.
+#### 11/11/2024
 
 ### Cerinta
 Solutiile vor fi trimise pe chat-ul individual de pe MSTeams pana pe 18.11.2024. Trimiteti o imagine care sa includa (i) rezultatul, (ii) fragmentul de cod sursa relevant.
