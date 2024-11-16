@@ -48,3 +48,11 @@ Rezolvare in [homework/03_03](homework/03_03.cpp) cu exta stelute pe fundal.
 
 https://github.com/user-attachments/assets/8a03c6ff-4529-440a-b087-b4bef194d131
 </details>
+
+<details>
+  <summary>Tema 4 - 📐 scalare si translatie</summary>
+
+Rezolvare in [homework/03_04](homework/03_04.cpp).
+
+[tema4](homework/screenshot-03_04.png)
+</details>
