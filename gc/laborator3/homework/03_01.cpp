@@ -1,3 +1,10 @@
+/**
+ * Laborator 3 / tema 1
+ * Mihai Tuhari
+ *
+ * Modificati un element legat de miscare in codul sursa `03_06_animatie.cpp` (de exemplu deplasarea este de-a
+ * lungul axei Oy, se schimba sensul rotatiei patratului rosu, etc.)
+ */
 #include <GL/freeglut.h>
 
 static GLdouble i = 0.0;
@@ -5,12 +12,12 @@ static GLdouble j = 0.0;
 static GLdouble alpha = 0.1;
 static GLdouble step = 0.1;
 
-void init(void) {
+void init() {
     glClearColor(1.0, 1.0, 1.0, 0.0);
     gluOrtho2D(0.0, 800.0, 0.0, 600.0);
 }
 
-void dreptunghi(void) {
+void draw() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
@@ -44,7 +51,7 @@ void reshape(int w, int h) {
     glLoadIdentity();
 }
 
-void miscad(void) {
+void moveRight() {
     i = i + step;
     if (i > 550.0)
         step = -alpha;
@@ -54,7 +61,7 @@ void miscad(void) {
     glutPostRedisplay();
 }
 
-void miscas(void) {
+void moveLeft() {
     i = i + step;
     if (i < 0.0)
         step = alpha;
@@ -69,12 +76,12 @@ void mouse(int button, int state, int x, int y) {
         case GLUT_LEFT_BUTTON:
             if (state == GLUT_DOWN)
                 step = -alpha;
-            glutIdleFunc(miscas);
+            glutIdleFunc(moveLeft);
             break;
         case GLUT_RIGHT_BUTTON:
             if (state == GLUT_DOWN)
                 step = alpha;
-            glutIdleFunc(miscad);
+            glutIdleFunc(moveRight);
             break;
         default:
             break;
@@ -90,7 +97,7 @@ int main(int argc, char **argv) {
     glutCreateWindow("Mihai Tuhari - Lab 3 / Punctul 1");
     init();
 
-    glutDisplayFunc(dreptunghi);
+    glutDisplayFunc(draw);
     glutReshapeFunc(reshape);
     glutMouseFunc(mouse);
     glutMainLoop();
