@@ -18,7 +18,7 @@
 
 // Constants
 const GLfloat SIDE_LENGTH = 30.0;
-const std::string path = "/Volumes/mihai/dev/fmi/gc/laborator3/examples/";
+const std::string path = "/Volumes/mihai/dev/fmi/gc/laborator3/";
 
 // Texture variables
 GLuint textureID;
@@ -26,7 +26,7 @@ int width, height, channels;
 
 void init() {
     glClearColor(1.0, 1.0, 1.0, 1.0);
-    glEnable(GL_TEXTURE_2D);
+    glMatrixMode(GL_PROJECTION);
 }
 
 void loadTexture(const std::string &path) {
@@ -111,17 +111,12 @@ void display() {
 
 void reshape(int w, int h) {
     glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
 
     if (w <= h) {
         gluOrtho2D(-200.0, 200.0, -200.0 * (GLfloat) h / (GLfloat) w, 200.0 * (GLfloat) h / (GLfloat) w);
     } else {
         gluOrtho2D(-200.0 * (GLfloat) w / (GLfloat) h, 200.0 * (GLfloat) w / (GLfloat) h, -200.0, 200.0);
     }
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
 }
 
 int main(int argc, char **argv) {
@@ -132,7 +127,7 @@ int main(int argc, char **argv) {
     glutCreateWindow("Mihai Tuhari - Lab 3 / Punctul 4");
 
     init();
-    loadTexture(path + "text_smiley_face.png");
+    loadTexture(path + "examples/text_smiley_face.png");
 
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);

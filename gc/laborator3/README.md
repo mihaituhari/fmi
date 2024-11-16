@@ -56,3 +56,13 @@ Rezolvare in [homework/03_04](homework/03_04.cpp).
 
 ![tema4](homework/screenshot-03_04.png)
 </details>
+
+<details>
+  <summary>Punctul 5 - 🌲 texturare si animat tema anterioara</summary>
+
+Rezolvare in [homework/03_05](homework/03_05.cpp), ca extensie a [laborator2/main.cpp](../laborator2/main.cpp).
+
+Am texturat si animat copacii de jos, dar am sters restul poligoanelor si triunghiurilor.
+
+https://github.com/user-attachments/assets/31e0108b-968c-4c3f-8998-b67a6a974ff1
+</details>

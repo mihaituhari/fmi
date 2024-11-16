@@ -1,4 +1,4 @@
-## Tema 2 / Primitive grafice.
+## Tema 2 / Primitive grafice
 #### 11/11/2024
 
 ### Cerinte
