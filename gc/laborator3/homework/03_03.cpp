@@ -14,8 +14,8 @@ const double EARTH_SIZE = 30.0;
 const double MOON_SIZE = 15.0;
 
 // Distance between planets
-const double EARTH_DISTANCE = 150.0; // From sun
-const double MOON_DISTANCE = 50.0; // From earth
+const double EARTH_DISTANCE = 150.0; // From Sun
+const double MOON_DISTANCE = 50.0; // From Earth
 
 // Rotation speeds
 const double SUN_ROTATION_SPEED = 0.5;
