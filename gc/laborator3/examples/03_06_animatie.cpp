@@ -6,8 +6,6 @@ Elemente de noutate:
 - importante: glutPostRedisplay(); glutIdleFunc() - pentru "tranzitii" line
 */
 #include <GL/freeglut.h>
-#include <stdlib.h>
-#include <math.h>
 
 static GLdouble i = 0.0;
 static GLdouble j = 0.0;

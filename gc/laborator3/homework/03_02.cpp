@@ -8,8 +8,8 @@
 
 static GLdouble x = 0.0;
 static GLdouble angle = 0.0;
-static GLdouble step = 10.0;
-static GLdouble rotation_speed = 10.0;
+static GLdouble step = 0.1;
+static GLdouble rotation_speed = 0.1;
 
 void init() {
     glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -52,7 +52,7 @@ void reshape(int w, int h) {
     glLoadIdentity();
 }
 
-void update(int value) {
+void update() {
     x += step;
 
     // Rotate based on the direction of movement
@@ -68,7 +68,6 @@ void update(int value) {
     }
 
     glutPostRedisplay();
-    glutTimerFunc(16, update, 0); // Approximately 60 FPS
 }
 
 int main(int argc, char **argv) {
@@ -81,7 +80,7 @@ int main(int argc, char **argv) {
     init();
     glutDisplayFunc(draw);
     glutReshapeFunc(reshape);
-    glutTimerFunc(16, update, 0);
+    glutIdleFunc(update); // Use glutIdleFunc instead of glutTimerFunc
 
     glutMainLoop();
 }
