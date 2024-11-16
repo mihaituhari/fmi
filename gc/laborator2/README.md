@@ -1,7 +1,7 @@
 ## Tema 2 / Primitive grafice.
 #### 11/11/2024
 
-### Cerinta
+### Cerinte
 Solutiile vor fi trimise pe chat-ul individual de pe MSTeams pana pe 18.11.2024. Trimiteti o imagine care sa includa (i) rezultatul, (ii) fragmentul de cod sursa relevant.
 
 1) (1p) Desenati, in aceeasi figura, un poligon convex si un poligon concav. Fundalul este un gradient (nu exista o functie dedicata in acest sens).
