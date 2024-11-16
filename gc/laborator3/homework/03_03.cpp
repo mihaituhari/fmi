@@ -5,6 +5,8 @@
  * Mini sistem solar (soare, pamant, luna) cu rotatii si orbite.
  */
 #include <GL/freeglut.h>
+#include <cstdlib>
+#include <ctime>
 
 // Sizes of planets
 const double SUN_SIZE = 50.0;
@@ -26,11 +28,25 @@ static GLdouble sunAngle = 0.0;
 static GLdouble earthAngle = 0.0;
 static GLdouble moonAngle = 0.0;
 
+// Star positions
+const int NUM_STARS = 100;
+GLfloat starPositions[NUM_STARS][2];
+
+// Lists
 GLuint sunList, earthList, moonList;
 
 void init() {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     gluOrtho2D(-400.0, 400.0, -300.0, 300.0);
+
+    // Initialize random seed
+    std::srand(std::time(0));
+
+    // Generate random star positions
+    for (int i = 0; i < NUM_STARS; ++i) {
+        starPositions[i][0] = (std::rand() % 800) - 400.0f; // X position
+        starPositions[i][1] = (std::rand() % 600) - 300.0f; // Y position
+    }
 
     // Sun display list
     sunList = glGenLists(1);
@@ -71,6 +87,15 @@ void init() {
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
+
+    // Draw stars
+    glColor3f(1.0, 1.0, 1.0);
+    glPointSize(2);
+    glBegin(GL_POINTS);
+    for (int i = 0; i < NUM_STARS; ++i) {
+        glVertex2f(starPositions[i][0], starPositions[i][1]);
+    }
+    glEnd();
 
     // Sun - center with self-rotation
     glPushMatrix();

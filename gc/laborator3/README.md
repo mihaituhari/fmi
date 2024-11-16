@@ -26,7 +26,7 @@ Desenati, in plus, in acelasi desen (atentie la ordinea transformarilor!):
 👇 **Click pe fiecare tema pentru detalii, cod si video.**
 
 <details>
-  <summary>Tema 1 - translatat cuburi pe Oy</summary>
+  <summary>Tema 1 - 📉 translatat cuburi pe Oy</summary>
 
 Rezolvare in [homework/03_01](homework/03_01.cpp)
 
@@ -34,9 +34,17 @@ https://github.com/user-attachments/assets/0fc88197-5baf-4d9f-81b4-c129c8df9c5e
 </details>
 
 <details>
-  <summary>Tema 2 - patrat rostologit pe Ox</summary>
+  <summary>Tema 2 - 🟥 patrat rostologit pe Ox</summary>
 
 Rezolvare in [homework/03_02](homework/03_02.cpp)
 
 https://github.com/user-attachments/assets/f1050217-b697-47fe-b98f-a2fa9c0a8467
+</details>
+
+<details>
+  <summary>Tema 3 - ☀️🌎🌘 mini sistem solar ✨</summary>
+
+Rezolvare in [homework/03_03](homework/03_03.cpp) cu exta stelute pe fundal.
+
+https://github.com/user-attachments/assets/8a03c6ff-4529-440a-b087-b4bef194d131
 </details>
