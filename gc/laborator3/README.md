@@ -1,4 +1,4 @@
-## Tema 3 / Texturi si animatii
+## Tema 3 / Animatii, texturi
 #### 16/11/2024
 
 ### Cerinta
