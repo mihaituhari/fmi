@@ -7,11 +7,13 @@
 #include <GL/freeglut.h>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 // Sizes of planets
-const double SUN_SIZE = 50.0;
-const double EARTH_SIZE = 30.0;
-const double MOON_SIZE = 15.0;
+const double PI = 3.141592653589793;
+const double SUN_RADIUS = 50.0;
+const double EARTH_RADIUS = 30.0;
+const double MOON_RADIUS = 15.0;
 
 // Distance between planets
 const double EARTH_DISTANCE = 150.0; // From Sun
@@ -35,6 +37,18 @@ GLfloat starPositions[NUM_STARS][2];
 // Lists
 GLuint sunList, earthList, moonList;
 
+void drawCircle(GLfloat radius, GLint segments) {
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex2f(0.0f, 0.0f); // Center of the circle
+    for (int i = 0; i <= segments; i++) {
+        GLfloat angle = 2.0f * PI * i / segments;
+        GLfloat x = radius * cos(angle);
+        GLfloat y = radius * sin(angle);
+        glVertex2f(x, y);
+    }
+    glEnd();
+}
+
 void init() {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     gluOrtho2D(-400.0, 400.0, -300.0, 300.0);
@@ -48,40 +62,25 @@ void init() {
         starPositions[i][1] = (std::rand() % 600) - 300.0f; // Y position
     }
 
-    // Sun display list
+    // Create Sun display list
     sunList = glGenLists(1);
     glNewList(sunList, GL_COMPILE);
     glColor3f(1.0, 1.0, 0.0); // Yellow Sun
-    glBegin(GL_QUADS);
-    glVertex2f(-SUN_SIZE / 2, -SUN_SIZE / 2);
-    glVertex2f(SUN_SIZE / 2, -SUN_SIZE / 2);
-    glVertex2f(SUN_SIZE / 2, SUN_SIZE / 2);
-    glVertex2f(-SUN_SIZE / 2, SUN_SIZE / 2);
-    glEnd();
+    drawCircle(SUN_RADIUS, 100); // Smooth circle with 100 segments
     glEndList();
 
-    // Earth display list
+    // Create Earth display list
     earthList = glGenLists(1);
     glNewList(earthList, GL_COMPILE);
     glColor3f(0.0, 0.0, 1.0); // Blue Earth
-    glBegin(GL_QUADS);
-    glVertex2f(-EARTH_SIZE / 2, -EARTH_SIZE / 2);
-    glVertex2f(EARTH_SIZE / 2, -EARTH_SIZE / 2);
-    glVertex2f(EARTH_SIZE / 2, EARTH_SIZE / 2);
-    glVertex2f(-EARTH_SIZE / 2, EARTH_SIZE / 2);
-    glEnd();
+    drawCircle(EARTH_RADIUS, 100); // Smooth circle with 100 segments
     glEndList();
 
-    // Moon display list
+    // Create Moon display list
     moonList = glGenLists(1);
     glNewList(moonList, GL_COMPILE);
-    glColor3f(0.5, 0.5, 0.5); // Gray Moon
-    glBegin(GL_QUADS);
-    glVertex2f(-MOON_SIZE / 2, -MOON_SIZE / 2);
-    glVertex2f(MOON_SIZE / 2, -MOON_SIZE / 2);
-    glVertex2f(MOON_SIZE / 2, MOON_SIZE / 2);
-    glVertex2f(-MOON_SIZE / 2, MOON_SIZE / 2);
-    glEnd();
+    glColor3f(0.5, 0.5, 0.5); // Grey Moon
+    drawCircle(MOON_RADIUS, 100); // Smooth circle with 100 segments
     glEndList();
 }
 
