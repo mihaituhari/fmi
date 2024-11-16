@@ -62,25 +62,25 @@ void init() {
         starPositions[i][1] = (std::rand() % 600) - 300.0f; // Y position
     }
 
-    // Create Sun display list
+    // Sun
     sunList = glGenLists(1);
     glNewList(sunList, GL_COMPILE);
-    glColor3f(1.0, 1.0, 0.0); // Yellow Sun
-    drawCircle(SUN_RADIUS, 100); // Smooth circle with 100 segments
+    glColor3f(1.0, 1.0, 0.0);
+    drawCircle(SUN_RADIUS, 100);
     glEndList();
 
     // Create Earth display list
     earthList = glGenLists(1);
     glNewList(earthList, GL_COMPILE);
-    glColor3f(0.0, 0.0, 1.0); // Blue Earth
-    drawCircle(EARTH_RADIUS, 100); // Smooth circle with 100 segments
+    glColor3f(0.0, 0.0, 1.0);
+    drawCircle(EARTH_RADIUS, 100);
     glEndList();
 
     // Create Moon display list
     moonList = glGenLists(1);
     glNewList(moonList, GL_COMPILE);
-    glColor3f(0.5, 0.5, 0.5); // Grey Moon
-    drawCircle(MOON_RADIUS, 100); // Smooth circle with 100 segments
+    glColor3f(0.5, 0.5, 0.5);
+    drawCircle(MOON_RADIUS, 100);
     glEndList();
 }
 
