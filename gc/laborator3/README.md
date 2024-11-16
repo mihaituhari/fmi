@@ -22,14 +22,20 @@ Desenati, in plus, in acelasi desen (atentie la ordinea transformarilor!):
 5) (2p/3p) Adaugati o textura intr-unul din desenele realizate la o tema anterioara (se acorda 2p pentru un desen
 "static", respectiv 3p pentru un desen "dinamic" animat).
 
-### Rezolvare
+### Rezolvari
 
-#### Tema 1
+<details>
+  <summary>Tema 1</summary>
+
 Rezolvare in [homework/03_01](homework/03_01.cpp)
 
 https://github.com/user-attachments/assets/0fc88197-5baf-4d9f-81b4-c129c8df9c5e
+</details>
 
-#### Tema 2
+<details>
+  <summary>Tema 2</summary>
+
 Rezolvare in [homework/03_02](homework/03_02.cpp)
 
 https://github.com/user-attachments/assets/f1050217-b697-47fe-b98f-a2fa9c0a8467
+</details>
