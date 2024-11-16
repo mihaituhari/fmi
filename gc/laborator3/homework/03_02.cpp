@@ -23,7 +23,7 @@ void draw() {
     glLoadIdentity();
 
     // Draw X-axis
-    glColor3f(0.0, 0.0, 0.0); // Black color for the axis
+    glColor3f(0.0, 0.0, 0.0);
     glBegin(GL_LINES);
     glVertex2f(0.0, 300.0);
     glVertex2f(800.0, 300.0);
@@ -55,16 +55,16 @@ void reshape(int w, int h) {
 void update() {
     x += step;
 
-    // Rotate based on the direction of movement
+    // Rotation based on movement direction
     if (step > 0) {
-        angle -= rotation_speed; // Rotate clockwise (right)
+        angle -= rotation_speed; // Right = rotate clockwise
     } else {
-        angle += rotation_speed; // Rotate counterclockwise (left)
+        angle += rotation_speed; // Left = rotate counterclockwise
     }
 
     // Reverse direction if hitting screen edges
     if (x > 800.0 || x < 0.0) {
-        step = -step; // Reverse direction
+        step = -step;
     }
 
     glutPostRedisplay();
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
     init();
     glutDisplayFunc(draw);
     glutReshapeFunc(reshape);
-    glutIdleFunc(update); // Use glutIdleFunc instead of glutTimerFunc
+    glutIdleFunc(update);
 
     glutMainLoop();
 }
