@@ -42,7 +42,7 @@ https://github.com/user-attachments/assets/f1050217-b697-47fe-b98f-a2fa9c0a8467
 </details>
 
 <details>
-  <summary>Tema 3 - ☀️🌎🌘 mini sistem solar ✨</summary>
+  <summary>Tema 3 - ✨ mini sistem solar ☀️🌎🌘</summary>
 
 Rezolvare in [homework/03_03](homework/03_03.cpp) cu exta stelute pe fundal.
 
