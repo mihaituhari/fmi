@@ -23,6 +23,7 @@ Desenati, in plus, in acelasi desen (atentie la ordinea transformarilor!):
 "static", respectiv 3p pentru un desen "dinamic" animat).
 
 ### Rezolvari
+👇 **Click pe fiecare tema pentru detalii, cod si video.**
 
 <details>
   <summary>Tema 1</summary>
