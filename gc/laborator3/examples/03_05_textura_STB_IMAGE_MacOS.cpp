@@ -9,8 +9,8 @@
 
 // Fork
 #define STB_IMAGE_IMPLEMENTATION // <<-- Adauga
-#include "stb_image.h" // <<-- Adauga
-std::string path = "/Volumes/mihai/dev/fmi/gc/laborator3/"; // <<-- Adauga si modifica
+#include "../libs/stb_image.h" // <<-- Adauga
+std::string path = "/Volumes/mihai/dev/fmi/gc/laborator3/examples/"; // <<-- Adauga si modifica
 // end Fork
 
 GLfloat texpts[2][2][2] = {{{1.0, 1.0}, {1.0, 0.0}},

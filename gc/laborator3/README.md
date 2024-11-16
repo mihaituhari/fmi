@@ -23,4 +23,8 @@ Desenati, in plus, in acelasi desen (atentie la ordinea transformarilor!):
 "static", respectiv 3p pentru un desen "dinamic" animat).
 
 ### Rezolvare
-TBA
+
+#### Tema 1
+Rezolvare in [homework/03_01](homework/03_01.cpp)
+
+https://github.com/user-attachments/assets/0fc88197-5baf-4d9f-81b4-c129c8df9c5e

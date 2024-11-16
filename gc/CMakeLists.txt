@@ -31,7 +31,7 @@ link_directories(
 # Add main.cpp and loadShaders.cpp to the executable
 add_executable(
         gc
-        laborator3/examples/03_07_transformari2D_comp.cpp
+        laborator3/homework/03_01.cpp
 )
 
 target_include_directories(gc PRIVATE
