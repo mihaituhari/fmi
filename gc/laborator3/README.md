@@ -26,8 +26,10 @@ Desenati, in plus, in acelasi desen (atentie la ordinea transformarilor!):
 
 #### Tema 1
 Rezolvare in [homework/03_01](homework/03_01.cpp)
+
 https://github.com/user-attachments/assets/0fc88197-5baf-4d9f-81b4-c129c8df9c5e
 
 #### Tema 2
 Rezolvare in [homework/03_02](homework/03_02.cpp)
+
 https://github.com/user-attachments/assets/f1050217-b697-47fe-b98f-a2fa9c0a8467
