@@ -66,9 +66,9 @@ cu optiuni de blending similare celor de la copaci.
 Masina 2 are atasat si conceptul de "semnalizare" pentru a indica depasirea. 🟡
 
 Semnalizarea este un singur cerc galben (facut cu helperul `drawCircle()`) cu transparenta 70% ce este atasat de masina.
-Aceasta este o singura instanta si in functie de valoarea `blinkersOn` (0=oprit, 1=stanga, 2=dreapta) se schimba pozitia pe axa Y fata de masina.
+Aceasta este o singura instanta si in functie de valoarea `blinkersOn` _(0=oprit, 1=stanga, 2=dreapta)_ isi schimba pozitia pe axa Y fata de masina.
 
-Programatic, am simulat o semnalizare apropiata de un comportament real:
+Programatic, am simulat o semnalizare apropiata de un **comportament real**:
 - Semnalizarea de depasire (stanga) este pornita cand mai sunt 2 lungimi de masina pana la masina din fata
 - Pe timpul depasirii, semnalizarea de depasire ramane pornita
 - Dupa ce masina lenta a fost intrecuta cu o lungime de masina, este pusa semnalizare de revenire (dreapta)
