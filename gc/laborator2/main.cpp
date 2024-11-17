@@ -133,7 +133,7 @@ void renderTree(int x) {
     glEndList();
 }
 
-void drawForest() {
+void drawTrees() {
     int treeSpacing = 50; // Spatierea intre copaci
 
     for (int x = 20; x < 800; x += treeSpacing) { // Toata latimea ecranului

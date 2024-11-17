@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
     glutCreateWindow("Mihai Tuhari - Lab 3 / Punctul 5");
 
     init();
-    loadTexture(path + "homework/texture-pine.png");
+    loadTexture(path + "homework/pine.png");
 
     glutDisplayFunc(display);
     glutIdleFunc(update);
