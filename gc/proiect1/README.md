@@ -22,7 +22,9 @@ vine din spate (tot prin translatii/rotatii), la un moment dat intra in depasire
 # Implementare
 
 ## Demo
-Pentru o lectura mai coerenta si simpla asupra documentatiei de mai jos, incepem cu o captura de ecran a intregului proiect:
+Pentru o lectura mai coerenta si simpla asupra documentatiei de mai jos, incepem cu o captura de ecran a proiectului.
+
+La sfarsit regasiti si un video.
 
 ![demo](docs/img-all.png)
 
