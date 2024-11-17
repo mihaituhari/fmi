@@ -19,29 +19,29 @@ vine din spate (tot prin translatii/rotatii), la un moment dat intra in depasire
 
 --------
 
-## Implementare
+# Implementare
 
-### Demo
+## Demo
 Pentru o lectura mai coerenta si simpla asupra documentatiei de mai jos, incepem cu o captura de ecran a intregului proiect:
 
 ![demo](docs/img-all.png)
 
-### Introducere
+## Introducere
 Am realizat o simulare a unei depasiri intre doua masini, folosind OpenGL si C++.
 
 Programul principal este in fisierul [proiect1.cpp](proiect1.cpp) si foloseste [libraria STB](libs/stb_image.h) pentru incarcarea texturilor.
 
-### Texturi
+## Texturi
 Pentru manipularea texturilor am ales STB in loc de SOIL pentru ca pe MacOS SOIL nu este compatibil.
 
 Texturile se regasesc in folderul [textures](textures) si sunt fisiere PNG cu fundal transparent, afisate si mai jos:
 
 <img src="textures/car1.png" width="100"> <img src="textures/car2.png" width="100"> <img src="textures/tree.png" width="100">
 
-### Conceptul
+## Conceptul
 Animatia este creata din mai multe componente cu roluri diferite:
 
-#### Scena statica
+### Scena statica
 Scena este un dreptunghi care reprezinta drumul pe care se deplaseaza masinile. 
 Este desenat cu culoarea verde iar asfaltul este gri.
 
@@ -51,22 +51,22 @@ Este desenat cu culoarea verde iar asfaltul este gri.
 ![scena](docs/img-scene.png)
 </details>
 
-#### Decor dinamic
+### Decor dinamic
 🛣️ Pentru a simula miscarea, am adaugat un **marcaj** discontinuu pe mijlocul drumului prin functia `drawRoad()`.
 Aceasta genereaza dreptunghiuri albe cu o anumita distanta intre ele.
 
 🌲 In partea superioara sunt desenati **copaci** tot pentru a simula miscarea si pentru un plus de complexitate.
 Acestia sunt adaugati prin `drawTrees()` si sunt dreptunghiuri ce se repeta pe latimea ecranului si au proportii 39x32
-peste care se aplica textura [tree.png](textures/tree.png) cu optiunile `glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)`
+peste care se aplica textura [tree.png](textures/tree.png) cu optiunile de blending `GL_SRC_ALPHA` si `GL_ONE_MINUS_SRC_ALPHA`
 pentru a afisa doar textura.
 
 <details>
-  <summary>📸 Screenshot scena</summary>
+  <summary>📸 Screenshot decor</summary>
 
 ![trees](docs/img-trees.png)
 </details>
 
-#### Masinile
+### Masinile
 Sunt adaugate 2 masini care se deplaseaza pe scena cu functia `drawCar()`.
 
 - Masina 1 este cea inceata
@@ -75,7 +75,7 @@ Sunt adaugate 2 masini care se deplaseaza pe scena cu functia `drawCar()`.
 Acestea sunt dreptunghiuri cu proportii 100x55 peste care se aplica texturile [car1.png](textures/car1.png) si [car2.png](textures/car2.png)
 cu optiuni de blending similare celor de la copaci.
 
-#### Semnalizarea
+### Semnalizarea
 Masina 2 are atasat si conceptul de "semnalizare" pentru a indica depasirea. 🟡
 
 Semnalizarea este un singur cerc galben (facut cu helperul `drawCircle()`) cu transparenta 70% ce este atasat de masina.
@@ -86,15 +86,15 @@ Programatic, am simulat o semnalizare apropiata de un **comportament real**:
 - Pe timpul depasirii, semnalizarea de depasire ramane pornita
 - Dupa ce masina lenta a fost intrecuta cu o lungime de masina, este pusa semnalizare de revenire (dreapta)
 
-#### Depasirea
+### Depasirea
 In timpul schimbarii de banda, masina 2 schimba banda pe axa Y cu o anumita viteza si unghi de rotatie.
 La revenire, masina 2 se intoarce la banda initiala.
 
 --------
 
-### Aspecte tehnice
+## Aspecte tehnice
 
-#### Design modular
+### Design modular
 Am abordat proiectul cu un design modular si am incercat sa folosesc cat mai multe functii pentru a separa logica.
 
 ### Configurabilitate
