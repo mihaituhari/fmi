@@ -1,5 +1,5 @@
 # Proiect 1 / 2D
-#### Noiembrie 2024
+#### Noiembrie 2024 / Mihai Tuhari
 
 ## Cerinta
 Dezvoltati un proiect 2D pentru tema aleasa.
@@ -29,11 +29,9 @@ Programul principal este in fisierul [proiect1.cpp](proiect1.cpp) si foloseste [
 ### Texturi
 Pentru manipularea texturilor am ales STB in loc de SOIL pentru ca pe MacOS SOIL nu este compatibil.
 
-Texturile se regasesc in folderul [textures](textures) si sunt fisiere PNG cu fundal transparent, afisate si mai jos
+Texturile se regasesc in folderul [textures](textures) si sunt fisiere PNG cu fundal transparent, afisate si mai jos:
 
 <img src="textures/car1.png" width="100"> <img src="textures/car2.png" width="100"> <img src="textures/tree.png" width="100">
-
---------
 
 ### Conceptul
 Animatia este creata din mai multe componente cu roluri diferite:
@@ -41,6 +39,8 @@ Animatia este creata din mai multe componente cu roluri diferite:
 #### Scena statica
 Scena este un dreptunghi care reprezinta drumul pe care se deplaseaza masinile. 
 Este desenat cu culoarea verde iar asfaltul este gri.
+
+![scena](docs/img-scene.png)
 
 #### Decor dinamic
 🛣️ Pentru a simula miscarea, am adaugat un **marcaj** discontinuu pe mijlocul drumului prin functia `drawRoad()`.
@@ -50,6 +50,8 @@ Aceasta genereaza dreptunghiuri albe cu o anumita distanta intre ele.
 Acestia sunt adaugati prin `drawTrees()` si sunt dreptunghiuri ce se repeta pe latimea ecranului si au proportii 39x32
 peste care se aplica textura [tree.png](textures/tree.png) cu optiunile `glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)`
 pentru a afisa doar textura.
+
+![trees](docs/img-trees.png)
 
 #### Masinile
 Sunt adaugate 2 masini care se deplaseaza pe scena cu functia `drawCar()`.
@@ -75,6 +77,8 @@ Programatic, am simulat o semnalizare apropiata de un comportament real:
 In timpul schimbarii de banda, masina 2 schimba banda pe axa Y cu o anumita viteza si unghi de rotatie.
 La revenire, masina 2 se intoarce la banda initiala.
 
+![cars](docs/img-cars.png)
+
 --------
 
 ### Aspecte tehnice
@@ -97,6 +101,8 @@ Acolo regasiti variabile pentru:
 Pentru a realiza animatia, am folosit urmatoarele transformari:
 - Translatie
 - Rotatie
+
+Cand o masina ajunge la capatul ecranului, aceasta este repusa la inceputul drumului.
 
 ### Limba
 Intreg codul, cu tot cu comentarii, este scris in limba Engleza din motive de coerenta si simplitate.
