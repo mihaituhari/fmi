@@ -4,9 +4,7 @@
 ## Cerinta
 Dezvoltati un proiect 2D pentru tema aleasa:
 
-🌲🌲🌲🌲
-
- 🚙 ....... 🚗💨
+🚙 🚗💨 🌲🌲🌲🌲
 
 Simulati o **"depasire"**: o masina / un dreptunghi se deplaseaza uniform (prin translatie), un alt dreptunghi
 vine din spate (tot prin translatii/rotatii), la un moment dat intra in depasire, apoi trece in fata primului.
@@ -32,9 +30,7 @@ Pentru manipularea texturilor am ales STB in loc de SOIL pentru ca pe MacOS SOIL
 
 Texturile se regasesc in folderul [textures](textures) si sunt fisiere PNG cu fundal transparent, afisate si mai jos
 
-<img src="textures/car1.png" width="100">
-<img src="textures/car2.png" width="100">
-<img src="textures/tree.png" width="100">
+<img src="textures/car1.png" width="100"> <img src="textures/car2.png" width="100"> <img src="textures/tree.png" width="100">
 
 --------
 
