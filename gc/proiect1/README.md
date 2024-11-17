@@ -62,7 +62,7 @@ Sunt adaugate 2 masini care se deplaseaza pe scena cu functia `drawCar()`.
 Acestea sunt dreptunghiuri cu proportii 100x55 peste care se aplica texturile [car1.png](textures/car1.png) si [car2.png](textures/car2.png)
 cu optiuni de blending similare celor de la copaci.
 
-##### Semnalizarea
+#### Semnalizarea
 Masina 2 are atasat si conceptul de "semnalizare" pentru a indica depasirea. 🟡
 
 Semnalizarea este un singur cerc galben (facut cu helperul `drawCircle()`) cu transparenta 70% ce este atasat de masina.
