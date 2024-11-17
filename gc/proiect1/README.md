@@ -2,15 +2,16 @@
 #### Noiembrie 2024
 
 ## Cerinta
-Dezvoltati un proiect 2D pentru tema aleasa:
-
-🚙 🚗💨 🌲🌲🌲🌲
+Dezvoltati un proiect 2D pentru tema aleasa.
 
 Simulati o **"depasire"**: o masina / un dreptunghi se deplaseaza uniform (prin translatie), un alt dreptunghi
 vine din spate (tot prin translatii/rotatii), la un moment dat intra in depasire, apoi trece in fata primului.
 
+🚙 🚗💨 🌲🌲🌲🌲
+
 <details>
   <summary>Precizari cerinta</summary>
+
 1. Aplicatia este insotita de o scurta documentatie. In documentatie vor fi prezentate pe scurt (i) conceptul proiectului; (ii) ce transformari au fost incluse; (iii) de ce este original? (iv) capturi de ecran (cod, rezultat) relevante; (v) contributii individuale (daca este cazul).
 2. Detaliere punctaj: 3p realizare proiect; 3p originalitate/dificultate/elemente incluse; 3p discutii/prezentari; 2p documentatie.
 3. Proiectul poate fi realizat in echipa (recomandat: 1-4 membri, sa fie anuntate din timp!). In acest caz documentatia va sublinia contributia individuala.
