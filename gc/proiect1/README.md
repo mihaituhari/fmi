@@ -21,6 +21,11 @@ vine din spate (tot prin translatii/rotatii), la un moment dat intra in depasire
 
 ## Implementare
 
+### Demo
+Pentru o lectura mai coerenta si simpla asupra documentatiei de mai jos, incepem cu o captura de ecran a intregului proiect:
+
+![demo](docs/img-all.png)
+
 ### Introducere
 Am realizat o simulare a unei depasiri intre doua masini, folosind OpenGL si C++.
 
@@ -40,7 +45,11 @@ Animatia este creata din mai multe componente cu roluri diferite:
 Scena este un dreptunghi care reprezinta drumul pe care se deplaseaza masinile. 
 Este desenat cu culoarea verde iar asfaltul este gri.
 
+<details>
+  <summary>📸 Screenshot scena</summary>
+
 ![scena](docs/img-scene.png)
+</details>
 
 #### Decor dinamic
 🛣️ Pentru a simula miscarea, am adaugat un **marcaj** discontinuu pe mijlocul drumului prin functia `drawRoad()`.
@@ -51,7 +60,11 @@ Acestia sunt adaugati prin `drawTrees()` si sunt dreptunghiuri ce se repeta pe l
 peste care se aplica textura [tree.png](textures/tree.png) cu optiunile `glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)`
 pentru a afisa doar textura.
 
+<details>
+  <summary>📸 Screenshot scena</summary>
+
 ![trees](docs/img-trees.png)
+</details>
 
 #### Masinile
 Sunt adaugate 2 masini care se deplaseaza pe scena cu functia `drawCar()`.
@@ -76,8 +89,6 @@ Programatic, am simulat o semnalizare apropiata de un **comportament real**:
 #### Depasirea
 In timpul schimbarii de banda, masina 2 schimba banda pe axa Y cu o anumita viteza si unghi de rotatie.
 La revenire, masina 2 se intoarce la banda initiala.
-
-![cars](docs/img-cars.png)
 
 --------
 
@@ -105,9 +116,10 @@ Pentru a realiza animatia, am folosit urmatoarele transformari:
 Cand o masina ajunge la capatul ecranului, aceasta este repusa la inceputul drumului.
 
 ### Limba
-Intreg codul, cu tot cu comentarii, este scris in limba Engleza din motive de coerenta si simplitate.
+Intreg codul (cu tot cu comentarii), este scris in limba Engleza din motive de coerenta si simplitate, pentru a
+evita combinatia intre termeni in limba Romana si Engleza.
 
 ### Video
-Un video face cat 1000000 de cuvinte:
+Mai jos este un video cu animatia in actiune:
 
 https://github.com/user-attachments/assets/fc02d11f-a344-4455-b8ed-20c73d5e48cb
