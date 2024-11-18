@@ -266,7 +266,7 @@ void update(int value) {
         }
 
         // Overtaking completed. Will return to initial lane
-        if (car2X - car1X > (carWidth)) {
+        if (car2X - car1X > carWidth) {
             overtaking = false;
             returningToLane = true;
         }
