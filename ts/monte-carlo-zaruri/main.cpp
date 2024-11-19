@@ -14,7 +14,7 @@
  *     Aceasta este o metoda de simulare Monte Carlo, in care generam o serie de aruncari aleatorii
  *     pentru a estima probabilitatea unui eveniment (suma sa fie cea introdusa).
  *  3. Verifica dacă suma obținuta este cea introdusa si numara de cate ori se intampla acest lucru.
- *  4. Calculeaza probabilitatea ca suma să fie cea introdusa, afisand rezultatul ca procentaj.
+ *  4. Calculeaza probability ca suma să fie cea introdusa, afisand rezultatul ca procentaj.
  *
  * @author Mihai Tuhari (FMI ID, anul 3)
 */
@@ -49,10 +49,10 @@ int main() {
         return 0;
     }
 
-    double probability = simuleazaAruncareZaruri();
+    double probabilitate = simuleazaAruncareZaruri();
     std::cout << "🎲 Probabilitatea de a obtine suma zarurilor " << sumaTinta
               << " din " << numarAruncari << " aruncari este de aproximativ: "
-              << (probability * 100) << "% ✅";
+              << (probabilitate * 100) << "% ✅";
 
     return 1;
 }
