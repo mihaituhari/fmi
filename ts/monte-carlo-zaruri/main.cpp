@@ -52,7 +52,7 @@ int main() {
     double probability = simuleazaAruncareZaruri();
     std::cout << "🎲 Probabilitatea de a obtine suma zarurilor " << sumaTinta
               << " din " << numarAruncari << " aruncari este de aproximativ: "
-              << (probability * 100) << "%";
+              << (probability * 100) << "% ✅";
 
     return 1;
 }
