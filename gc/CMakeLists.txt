@@ -31,8 +31,10 @@ link_directories(
 # Add main.cpp and loadShaders.cpp to the executable
 add_executable(
         gc
-#        proiect1/proiect1.cpp
-        laborator4/examples/04_01_coord_omogene.cpp
+#        laborator5/examples/05_03_keyboard.cpp
+        laborator5/examples/05_04_cub_texturat_survolare.cpp
+        #        proiect1/proiect1.cpp
+#        laborator4/examples/04_01_coord_omogene.cpp
 )
 
 target_include_directories(gc PRIVATE
