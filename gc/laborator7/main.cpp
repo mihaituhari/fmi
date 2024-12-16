@@ -120,6 +120,14 @@ void drawShadow() {
     glEnable(GL_LIGHTING);
 }
 
+void setSceneColor() {
+    if (fog) {
+        glClearColor(0.5, 0.5, 0.5, 1.0); // Ceata
+    } else {
+        glClearColor(0.8, 0.9, 0.95, 0.0); // Fundal implicit
+    }
+}
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -156,14 +164,6 @@ void processSpecialKeys(int key, int xx, int yy) {
     }
 
     glutPostRedisplay();
-}
-
-void setSceneColor() {
-    if (fog) {
-        glClearColor(0.5, 0.5, 0.5, 1.0); // Ceata
-    } else {
-        glClearColor(0.8, 0.9, 0.95, 0.0); // Fundal implicit
-    }
 }
 
 void processNormalKeys(unsigned char key, int x, int y) {
