@@ -12,7 +12,7 @@ Trimiteti o imagine care sa includa (i) rezultatul, (ii) fragmentul de cod sursa
 (maxim 1 rand/comentariu).
 
 3) (1p) Aplicati umbra pentru obiectul 3D creat.
-4) (1p) In aceeasi scena, introductei efectul de ceata
+4) (1p) In aceeasi scena, introduceti efectul de ceata
 
 ### Rezolvare
 Rezolvare in [main.cpp](main.cpp)
