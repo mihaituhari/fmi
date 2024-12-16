@@ -31,7 +31,11 @@ link_directories(
 # Add main.cpp and loadShaders.cpp to the executable
 add_executable(
         gc
-        laborator5/main.cpp
+#        laborator5/main.cpp
+#        laborator7/examples/08_04_ceata.cpp
+#        laborator7/examples/08_03_alpha3d.cpp
+#        laborator7/examples/08_01_alpha2d.cpp
+        laborator7/examples/08_02_poliedre3ddepth.cpp
 )
 
 target_include_directories(gc PRIVATE
