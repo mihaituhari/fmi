@@ -1,8 +1,8 @@
 #include <windows.h>
 #include <gl/freeglut.h>
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
-#include <math.h> 
+#include <math.h>
 
 #define PI 3.14159265
 
@@ -62,7 +62,7 @@ void desen(void)
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	// roteste corpurile geometrice 
+	// roteste corpurile geometrice
 	glRotated(theta, 1.0, 0.0, 0.0);
 	glLineWidth(1.0);
 
@@ -76,7 +76,7 @@ void desen(void)
 	glutSolidCube(6.0);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, negru);
 
-	// cub mic 
+	// cub mic
 	GLfloat diffuseCoeffv[] = { 0.9, 0.4, 0.9, 0.0 };
 	//glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffuseCoeffv);
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, diffuseCoeffv);
@@ -96,7 +96,7 @@ void desen(void)
 	glutWireCone(6.0, 5.0, 150, 150);
 	glPopMatrix();
 
-	//sfera 
+	//sfera
 	GLfloat diffuseCoeffve[] = { 0.0, 0.9, 0.2, 1.0 };
 	GLfloat specularCoeffalb[] = { 0.0, 0.0, 0.9, 1.0 };
 	//glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, diffuseCoeffve);
@@ -120,7 +120,7 @@ void desen(void)
 		glVertex3i(0, 0, 0);
 		glVertex3i(0, 0, 19);
 	glEnd();
-	//literele 
+	//literele
 	glRasterPos3i(21, 0, 0);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, 'x');
 	glRasterPos3i(0, 21, 0);

@@ -3,8 +3,6 @@
 
 ### Cerinta
 
-
-
 Solutiile vor fi trimise pe chat-ul individual de pe MSTeams pana pe 16.12.2024.
 Trimiteti o imagine care sa includa (i) rezultatul, (ii) fragmentul de cod sursa relevant.
 
