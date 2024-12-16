@@ -50,18 +50,36 @@ void setupFog() {
 }
 
 void drawChristmasTree() {
-    // Brad
     GLfloat tree_ambient[] = {0.0, 0.2, 0.0, 1.0};
     GLfloat tree_diffuse[] = {0.0, 0.6, 0.0, 1.0};
     GLfloat tree_specular[] = {0.0, 0.1, 0.0, 1.0};
     GLfloat tree_shininess[] = {10.0};
     GLfloat tree_emission[] = {0.2, 0.2, 0.2, 1.0};
 
+    // Implicit - brad normal
     glMaterialfv(GL_FRONT, GL_AMBIENT, tree_ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, tree_diffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, tree_specular);
     glMaterialfv(GL_FRONT, GL_SHININESS, tree_shininess);
     glMaterialfv(GL_FRONT, GL_EMISSION, tree_emission);
+
+    // Modificare 1 - bradul emite rosu
+    // GLfloat tree_emission_red[] = {1.0, 0.0, 0.0, 1.0};
+    // glMaterialfv(GL_FRONT, GL_EMISSION, tree_emission_red);
+
+    // Modificare 2 - bradul este metalic
+    // GLfloat tree_specular_metalic[] = {0.8, 0.8, 0.8, 1.0};
+    // GLfloat tree_shininess_metallic[] = {100.0};
+    // glMaterialfv(GL_FRONT, GL_SPECULAR, tree_specular_metalic);
+    // glMaterialfv(GL_FRONT, GL_SHININESS, tree_shininess_metallic);
+
+    // Modificare 3 - lumina speculara galbena
+    // GLfloat tree_specular_yellow[] = {1.0, 1.0, 0.0, 1.0};
+    // glMaterialfv(GL_FRONT, GL_SPECULAR, tree_specular_yellow);
+
+    // Modificare 4 - brad difuz albastru
+    // GLfloat tree_diffuse_blue[] = {0.0, 0.0, 1.0, 1.0};
+    // glMaterialfv(GL_FRONT, GL_DIFFUSE, tree_diffuse_blue);
 
     // Conul de jos
     glPushMatrix();

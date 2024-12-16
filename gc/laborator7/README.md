@@ -19,4 +19,18 @@ Rezolvare in [main.cpp](main.cpp)
 
 ![result](result.png) ![result-fog](result-fog.png)
 
+Modificari aduse pentru iluminare:
+
+#### Brad rosu
+![result-light-1](result-light-1.png)
+
+#### Brad metalic
+![result-light-2](result-light-2.png)
+
+#### Lumina speculara galbena
+![result-light-3](result-light-3.png)
+
+#### Brad difuz albastru
+![img.png](result-light-4.png)
+
 https://github.com/user-attachments/assets/ec470f39-db52-45f0-8dcb-f4b481b07299
