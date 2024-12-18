@@ -12,7 +12,7 @@ pentru a estima probabilitatea unui eveniment (suma sa fie cea introdusa).
 4. Calculeaza probabilitatea ca suma să fie cea introdusa, afisand rezultatul ca procentaj.
 
 #### Implementare
-Vedeti fisierul [monte-carlo-zaruri/main.cpp](main.cpp) pentru codul sursa.
+Vedeti fisierul [tema-1/main.cpp](main.cpp) pentru codul sursa.
 
 #### Compilare si rulare
 Rezultatul compilarii si rularii programului este:
