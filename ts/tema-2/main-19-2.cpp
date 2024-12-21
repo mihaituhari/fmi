@@ -1,9 +1,12 @@
 #include <iostream>
 #include <random>
+#include <vector>
+#include <numeric>
+#include <cmath>
 
 /**
  * Sa se genereze variabila geometrica prin doua metode (curs 7).
- * Variabila geometrica reprezinta numarul de esecuri inainte de primul succes, care este intotdeauna un numar întreg.
+ * Variabila geometrica reprezinta numarul de esecuri inainte de primul succes, care este intotdeauna un numar intreg.
  *
  * @author Mihai Tuhari
  */
@@ -41,7 +44,7 @@ int algoritm_Binom1(double p, int n) {
         ++X; // Esec
     }
 
-    return X;
+    return X; // Returnam numarul total de esecuri daca nu am avut succes
 }
 
 /**
@@ -59,31 +62,75 @@ int algoritm_Binom1(double p, int n) {
 int algoritm_Bernoulli(double p) {
     int X = 0; // Variabila geometrica - numaram esecurile
 
+    // Generam pana cand avem un succes
     while (true) {
-        double U = uniform(gen); // P1) Generam o valoare uniforma
+        double U = uniform(gen); // Generam o valoare uniforma
 
-        if (U > 1 - p) { // P2) Verificam daca avem succes
+        if (U > 1 - p) { // Verificam daca avem succes
             break; // Succes - oprim bucla
         }
 
-        ++X; // Esec
+        ++X; // Incrementam pentru fiecare esec
     }
 
-    return X;
+    return X; // Returnam numarul total de esecuri
+}
+
+/**
+ * Functie pentru calculul mediei, dispersiei si deviatiei standard a selectiei.
+ *
+ * @param values Vectorul de valori generate.
+ * @return Tuple (media, dispersia, deviatie standard).
+ */
+std::tuple<double, double, double> calculareMedieSiDispersie(const std::vector<int>& values) {
+    // Calculam suma tuturor valorilor
+    double sum = std::accumulate(values.begin(), values.end(), 0.0);
+
+    // Calculam media valorilor
+    double mean = sum / values.size();
+
+    // Calculam suma patratelor valorilor
+    double sq_sum = std::inner_product(values.begin(), values.end(), values.begin(), 0.0);
+
+    // Calculam dispersia folosind formula dispersiei populatiei
+    double variance = (sq_sum / values.size()) - (mean * mean);
+
+    // Calculam deviatie standard
+    double stddev = std::sqrt(variance);
+
+    // Returnam media, dispersia si deviatia standard ca tuple
+    return {mean, variance, stddev};
 }
 
 int main() {
     // Probabilitatea de succes
     double p = 0.5;
     int n = 100; // Numar maxim de iteratii pentru metoda Binom1
+    int sample_size = 1000; // Numar de esantioane generate
+
+    // Vectori pentru stocarea esantioanelor
+    std::vector<int> samples_binom1;
+    std::vector<int> samples_bernoulli;
 
     // Generare folosind metoda Binom1
-    int geometric1 = algoritm_Binom1(p, n);
-    std::cout << "Variabila geometrica generata prin metoda Binom1: " << geometric1 << std::endl;
+    for (int i = 0; i < sample_size; ++i) {
+        samples_binom1.push_back(algoritm_Binom1(p, n));
+    }
 
     // Generare folosind metoda Bernoulli
-    int geometric2 = algoritm_Bernoulli(p);
-    std::cout << "Variabila geometrica generata prin metoda Bernoulli: " << geometric2 << std::endl;
+    for (int i = 0; i < sample_size; ++i) {
+        samples_bernoulli.push_back(algoritm_Bernoulli(p));
+    }
+
+    // Calculul mediei, dispersiei si deviatiei standard pentru Binom1
+    auto [mean_binom1, variance_binom1, stddev_binom1] = calculareMedieSiDispersie(samples_binom1);
+    std::cout << "Metoda Binom1:\n";
+    std::cout << "Media: " << mean_binom1 << ", Dispersia: " << variance_binom1 << ", Deviatie standard: " << stddev_binom1 << "\n\n";
+
+    // Calculul mediei, dispersiei si deviatiei standard pentru Bernoulli
+    auto [mean_bernoulli, variance_bernoulli, stddev_bernoulli] = calculareMedieSiDispersie(samples_bernoulli);
+    std::cout << "Metoda Bernoulli:\n";
+    std::cout << "Media: " << mean_bernoulli << ", Dispersia: " << variance_bernoulli << ", Deviatie standard: " << stddev_bernoulli << "\n\n";
 
     return 0;
 }

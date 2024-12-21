@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include <vector>
+#include <numeric>
+#include <tuple>
 
 /**
  * Sa se genereze variabila Beta(3, 5) prin doua metode (curs 6).
@@ -91,18 +94,61 @@ double algoritm_Norm2(double a, double b) {
     return (X + a) / (a + b);
 }
 
+/**
+ * Functie pentru calculul mediei, dispersiei si deviatiei standard a selectiei.
+ *
+ * @param values Vectorul de valori generate.
+ * @return Tuple (media, dispersia, deviatie standard).
+ */
+std::tuple<double, double, double> calculareMedieSiDispersie(const std::vector<double>& values) {
+    // Calculam suma tuturor valorilor
+    double sum = std::accumulate(values.begin(), values.end(), 0.0);
+
+    // Calculam media valorilor
+    double mean = sum / values.size();
+
+    // Calculam suma patratelor valorilor
+    double sq_sum = std::inner_product(values.begin(), values.end(), values.begin(), 0.0);
+
+    // Calculam dispersia folosind formula dispersiei populatiei
+    double variance = (sq_sum / values.size()) - (mean * mean);
+
+    // Calculam deviatie standard
+    double stddev = std::sqrt(variance);
+
+    // Returnam media, dispersia si deviatia standard ca tuple
+    return {mean, variance, stddev};
+}
+
 int main() {
     // Parametrii pentru Beta(3, 5)
     double a = 3.0;
     double b = 5.0;
+    int n = 1000; // Numar de esantioane generate
+
+    // Vectori pentru stocarea esantioanelor
+    std::vector<double> samples_beta3;
+    std::vector<double> samples_norm2;
 
     // Generare folosind metoda Beta3
-    double beta3 = algoritm_Beta3(a, b);
-    std::cout << "Variabila Beta(3, 5) generata prin Algoritmul Beta3: " << beta3 << std::endl;
+    for (int i = 0; i < n; ++i) {
+        samples_beta3.push_back(algoritm_Beta3(a, b));
+    }
 
     // Generare folosind metoda Norm2
-    double norm2 = algoritm_Norm2(a, b);
-    std::cout << "Variabila Beta(3, 5) generata prin Algoritmul Norm2: " << norm2 << std::endl;
+    for (int i = 0; i < n; ++i) {
+        samples_norm2.push_back(algoritm_Norm2(a, b));
+    }
+
+    // Calculul mediei, dispersiei si deviatiei standard pentru Beta3
+    auto [mean_beta3, variance_beta3, stddev_beta3] = calculareMedieSiDispersie(samples_beta3);
+    std::cout << "Metoda Beta3:\n";
+    std::cout << "Media: " << mean_beta3 << ", Dispersia: " << variance_beta3 << ", Deviatie standard: " << stddev_beta3 << "\n\n";
+
+    // Calculul mediei, dispersiei si deviatiei standard pentru Norm2
+    auto [mean_norm2, variance_norm2, stddev_norm2] = calculareMedieSiDispersie(samples_norm2);
+    std::cout << "Metoda Norm2:\n";
+    std::cout << "Media: " << mean_norm2 << ", Dispersia: " << variance_norm2 << ", Deviatie standard: " << stddev_norm2 << "\n\n";
 
     return 0;
 }
