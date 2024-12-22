@@ -7,75 +7,53 @@
 
 ------
 
-#### Partea 1
+### Partea 1
+
+#### Cerinta
 Cerinta spune:
 > Sa se genereze variabila `Beta(3, 5)` prin doua metode (curs 6).
 
-Am ales sa folosesc algoritmii `Beta3` si `Norm2`, descrisi mai jos:
+##### Metode alese
 
-```
- Algoritmul Beta3
+###### Metoda 1
+![gamma](docs/doc-1-1-gamma.png)
 
- → Intrare: 0 < a, b < 1
- → P1: Se genereaza U1,U2 ∼ U(0, 1) independente;
- → P2: V = U1 ^1/a, T = U2 ^1/b;
- → P3: Daca V + T < 1 mergi la P4, altfel mergi la P1;
- → P4: X := V / (V+T);
- → Iesire: Variabila aleatoare X.
-```
-
-```
- Algoritmul Norm2
-
- → Intrare:
- → P1: Se genereaza U ∼ U(0, 1);
- → P2: Se genereaza Y ∼ Exp(1);
- → P3: Daca U ≤ e^(-Y^2 / 2 + Y - 0.5) mergi la P4, altfel mergi la P1;
- → P4: X1 := Y;
- → P5: Se genereaza U ∼ U(0, 1);
- → P6: Daca U ≤ 0.5 atunci s = 1, altfel s := −1;
- → P7: X := sX1;
- → Iesire: Variabila aleatoare X.
-```
+###### Metoda 2
+![stat](docs/doc-1-2-stat.png)
 
 #### Implementare
-Vedeti fisierul [tema-2/main-19-1.cpp](main-19-1.cpp) pentru codul sursa.
+Codul sursa al celor doua metode este in fisierul [tema-2/main-19-1.cpp](main-19-1.cpp).
 
-#### Compilare si rulare
+#### Compilare si rezultat
 Rezultatul compilarii si rularii programului este:
-![result-19-1](result-19-1.png)
+![result-1](docs/result-1.png)
+
+#### Testare
+Pentru a testa corectitudinea metodelor, am folosit:
+![testare](docs/doc-testare.png)
 
 ------
 
-#### Partea 2
-Cerinta spune:
+### Partea 2
+
+#### Cerinta spune:
 > Sa se genereze variabila geometrica prin doua metode (curs 7).
 
-Am ales sa folosesc algoritmii `Binom1` si `Bernoulli`, descrisi mai jos:
+##### Metode alese
 
-```
- Algoritmul Binom1
+###### Metoda 1
+![pascal](docs/doc-2-1-pascal.png)
 
- → Intrare: n, p
- → P1: i = 1, X = 0;
- → P2: Se genereaza Z_i ∼ Bern(p), X := X + Z_i;
- → P3: Daca i = n stop, altfel i := i + 1, mergi la P2;
- → Iesire: Variabila aleatoare geometrica X.
-```
-
-```
- Algoritmul Bernoulli
-
- → Intrare: Probabilitatea de succes p
- → P1: Se genereaza U ∼ U(0, 1);
- → P2: Daca U ≤ 1 - p atunci Z = 0, altfel Z = 1;
- → Iesire: Variabila aleatoare Z.
-```
+###### Metoda 2
+![stat](docs/doc-2-2-geom.png)
 
 #### Implementare
-Vedeti fisierul [tema-2/main-19-2.cpp](main-19-1.cpp) pentru codul sursa.
+Codul sursa al celor doua metode este in fisierul [tema-2/main-19-2.cpp](main-19-2.cpp).
 
-#### Compilare si rulare
+#### Compilare si rezultat
 Rezultatul compilarii si rularii programului este:
-![result-19-2](result-19-2.png)
+![result-1](docs/result-2.png)
 
+#### Testare
+Pentru a testa corectitudinea metodelor, am folosit:
+![testare](docs/doc-testare.png)
