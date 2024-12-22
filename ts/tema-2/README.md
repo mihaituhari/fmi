@@ -53,7 +53,3 @@ Codul sursa al celor doua metode este in fisierul [tema-2/main-19-2.cpp](main-19
 #### Compilare si rezultat
 Rezultatul compilarii si rularii programului este:
 ![result-1](docs/result-2.png)
-
-#### Testare
-Pentru a testa corectitudinea metodelor, am folosit:
-![testare](docs/doc-testare.png)
