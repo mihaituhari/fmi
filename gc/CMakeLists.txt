@@ -31,7 +31,8 @@ link_directories(
 # Add main.cpp and loadShaders.cpp to the executable
 add_executable(
         gc
-        laborator7/main.cpp
+#        proiect1/proiect1-scene.cpp
+        proiect2/proiect2.cpp
 )
 
 target_include_directories(gc PRIVATE
