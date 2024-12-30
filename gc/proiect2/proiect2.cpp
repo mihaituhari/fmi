@@ -19,7 +19,7 @@ bool fog = false;
 float roadOffset = 0.0f;
 const float ROAD_SPEED = 0.1f;
 const float ROAD_WIDTH = 10.0f;
-const float ROAD_LENGTH = 100.0f;
+const float ROAD_LENGTH = 800.0f;
 
 GLuint textureMoon; // Texture for the moon
 const std::string texturePath = "/Volumes/mihai/dev/fmi/gc/proiect2/textures/";
@@ -58,22 +58,23 @@ void drawMoon() {
     glEnable(GL_TEXTURE_2D); // Enable texture mapping
     glBindTexture(GL_TEXTURE_2D, textureMoon);
 
-    // Set moonlight
-    GLfloat moonLightAmbient[] = {0.3f, 0.3f, 0.3f, 1.0f};
-    GLfloat moonLightDiffuse[] = {0.7f, 0.7f, 0.7f, 1.0f};
-    GLfloat moonLightPosition[] = {20.0f, 20.0f, 20.0f, 1.0f};
+    // Enhanced moon material properties
+    GLfloat moonAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f}; // Bright white
+    GLfloat moonDiffuse[] = {1.5f, 1.5f, 1.5f, 1.0f}; // Increased diffuse brightness
+    GLfloat moonSpecular[] = {2.0f, 2.0f, 2.0f, 1.0f}; // High specular reflection
+    GLfloat moonShininess[] = {128.0f};               // Very shiny surface
 
-    glEnable(GL_LIGHT1); // Enable a secondary light source for the moon
-    glLightfv(GL_LIGHT1, GL_AMBIENT, moonLightAmbient);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLightDiffuse);
-    glLightfv(GL_LIGHT1, GL_POSITION, moonLightPosition);
+    glMaterialfv(GL_FRONT, GL_AMBIENT, moonAmbient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, moonDiffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, moonSpecular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, moonShininess);
 
-    // Draw the moon as a sphere in the top-right corner
+    // Draw the moon as a textured sphere
     glPushMatrix();
-    glTranslatef(20.0f, 20.0f, 15.0f); // Position the moon in the top-right corner
+    glTranslatef(20.0f, 20.0f, 15.0f); // Position the moon
     GLUquadric* quad = gluNewQuadric();
-    gluQuadricTexture(quad, GL_TRUE); // Enable texture mapping for the sphere
-    gluSphere(quad, 3.0f, 30, 30); // Radius 3.0, 30 slices, 30 stacks
+    gluQuadricTexture(quad, GL_TRUE);  // Enable texture mapping for the sphere
+    gluSphere(quad, 3.0f, 30, 30);    // Radius 3.0, 30 slices, 30 stacks
     gluDeleteQuadric(quad);
     glPopMatrix();
 
@@ -206,19 +207,19 @@ void drawChristmasTree(float scaleFactor) {
 }
 
 void setupLighting() {
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glShadeModel(GL_SMOOTH);
+    glEnable(GL_LIGHTING); // Enable lighting
+    glEnable(GL_LIGHT1);   // Enable the moonlight as the primary light source
 
-    GLfloat position[] = {5.0, 5.0, 5.0, 1.0};
-    GLfloat ambient[] = {0.2, 0.2, 0.2, 1.0};
-    GLfloat diffuse[] = {0.8, 0.8, 0.8, 1.0};
-    GLfloat specular[] = {1.0, 1.0, 1.0, 1.0};
+    // Enhanced moonlight properties (bright white light)
+    GLfloat moonLightAmbient[] = {0.5f, 0.5f, 0.5f, 1.0f}; // Stronger ambient light
+    GLfloat moonLightDiffuse[] = {1.5f, 1.5f, 1.5f, 1.0f}; // Intense diffuse light
+    GLfloat moonLightSpecular[] = {2.0f, 2.0f, 2.0f, 1.0f}; // Bright specular highlights
+    GLfloat moonLightPosition[] = {20.0f, 20.0f, 15.0f, 1.0f}; // Position near the moon
 
-    glLightfv(GL_LIGHT0, GL_POSITION, position);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, moonLightAmbient);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLightDiffuse);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, moonLightSpecular);
+    glLightfv(GL_LIGHT1, GL_POSITION, moonLightPosition);
 }
 
 void display() {
@@ -305,7 +306,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("3D Animated Road Scene");
+    glutCreateWindow("3D Animated Road Scene with Moonlight");
 
     srand(static_cast<unsigned int>(time(0))); // Seed random generator
     initTreePositions();
@@ -320,7 +321,7 @@ int main(int argc, char** argv) {
     glutTimerFunc(16, update, 0);
 
     glEnable(GL_DEPTH_TEST);
-    glClearColor(0.0f, 0.39f, 0.0f, 1.0f);  // Dark green background
+    glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
 
     glutMainLoop();
     return 0;
