@@ -1,3 +1,6 @@
+#define STB_IMAGE_IMPLEMENTATION
+
+#include <iostream>
 #include <GL/freeglut.h>
 #include <cmath>
 #include <vector>
@@ -19,7 +22,7 @@ const float ROAD_WIDTH = 10.0f;
 const float ROAD_LENGTH = 100.0f;
 
 GLuint textureMoon; // Texture for the moon
-const std::string texturePath = "/Volumes/mihai/dev/fmi/gc/proiect1/textures/";
+const std::string texturePath = "/Volumes/mihai/dev/fmi/gc/proiect2/textures/";
 int width, height, channels;
 
 struct TreePosition {
@@ -28,6 +31,28 @@ struct TreePosition {
 };
 
 std::vector<TreePosition> treePositions;
+
+// Function to load textures
+void loadTexture(const std::string &path, GLuint &textureID) {
+    stbi_set_flip_vertically_on_load(1); // Flip the image vertically on load
+    unsigned char *image = stbi_load(path.c_str(), &width, &height, &channels, STBI_rgb_alpha);
+
+    if (!image) {
+        std::cerr << "Failed to load texture: " << path << std::endl;
+        exit(1);
+    }
+
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+    stbi_image_free(image);
+}
 
 void drawMoon() {
     glEnable(GL_TEXTURE_2D); // Enable texture mapping
@@ -209,23 +234,20 @@ void display() {
 
     setupLighting();
 
+    // Draw the moon
+    drawMoon();
+
     // Draw the road
     drawRoad();
 
     // Draw trees with seamless wrapping
     for (const auto& pos : treePositions) {
-        // Draw three sets of trees to ensure seamless wrapping
         for (int set = -1; set <= 1; set++) {
             float yOffset = pos.y + roadOffset + (set * ROAD_LENGTH);
-
-            // Only draw trees that are visible
             if (yOffset >= -ROAD_LENGTH / 2 && yOffset <= ROAD_LENGTH * 1.5) {
                 glPushMatrix();
                 glTranslatef(pos.x, yOffset, pos.z);
-
-                // Use the pre-generated scale factor
                 drawChristmasTree(pos.scaleFactor);
-
                 glPopMatrix();
             }
         }
@@ -287,6 +309,9 @@ int main(int argc, char** argv) {
 
     srand(static_cast<unsigned int>(time(0))); // Seed random generator
     initTreePositions();
+
+    // Load the moon texture
+    loadTexture(texturePath + "moon.jpg", textureMoon);
 
     glutReshapeFunc(reshapeAndProjection);
     glutDisplayFunc(display);
