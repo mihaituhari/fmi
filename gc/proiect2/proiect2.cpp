@@ -4,37 +4,40 @@
 #include <GL/freeglut.h>
 #include <cmath>
 #include <vector>
-#include <cstdlib> // For random numbers
-#include <ctime>   // For seeding random number generator
 #include "libs/stb_image.h"
 
+// Camera position
 float Refx = 0.0f, Refy = 0.0f, Refz = 0.0f;
-// Modified initial camera angles for isometric-like view
-float alpha = 0.4f;  // -45 degrees in radians for looking down
-float beta = -0.6f;    // 45 degrees in radians for side angle
-float dist = 30.0f;        // Increased distance to see more of the scene
+float alpha = 0.4f;
+float beta = -0.6f;
+float dist = 30.0f;
 float Obsx, Obsy, Obsz;
 
+// Fog flag
 bool fog = false;
+
+// Road elements
 float roadOffset = 0.0f;
 const float ROAD_SPEED = 0.1f;
 const float ROAD_WIDTH = 10.0f;
 const float ROAD_LENGTH = 800.0f;
 
-GLuint textureMoon; // Texture for the moon
+// Moon texture
+GLuint textureMoon;
 const std::string texturePath = "/Volumes/mihai/dev/fmi/gc/proiect2/textures/";
 int width, height, channels;
 
+// Tree positions
 struct TreePosition {
     float x, y, z;
-    float scaleFactor; // Random scale factor for consistent tree size
+    float scaleFactor;
 };
 
 std::vector<TreePosition> treePositions;
 
 // Function to load textures
 void loadTexture(const std::string &path, GLuint &textureID) {
-    stbi_set_flip_vertically_on_load(1); // Flip the image vertically on load
+    stbi_set_flip_vertically_on_load(1);
     unsigned char *image = stbi_load(path.c_str(), &width, &height, &channels, STBI_rgb_alpha);
 
     if (!image) {
@@ -55,52 +58,50 @@ void loadTexture(const std::string &path, GLuint &textureID) {
 }
 
 void drawMoon() {
-    glEnable(GL_TEXTURE_2D); // Enable texture mapping
+    glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, textureMoon);
 
-    // Enhanced moon material properties
     GLfloat moonAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f}; // Bright white
     GLfloat moonDiffuse[] = {1.5f, 1.5f, 1.5f, 1.0f}; // Increased diffuse brightness
     GLfloat moonSpecular[] = {2.0f, 2.0f, 2.0f, 1.0f}; // High specular reflection
-    GLfloat moonShininess[] = {128.0f};               // Very shiny surface
+    GLfloat moonShininess[] = {128.0f}; // Very shiny surface
 
     glMaterialfv(GL_FRONT, GL_AMBIENT, moonAmbient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, moonDiffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, moonSpecular);
     glMaterialfv(GL_FRONT, GL_SHININESS, moonShininess);
 
-    // Draw the moon as a textured sphere
     glPushMatrix();
-    glTranslatef(20.0f, 20.0f, 15.0f); // Position the moon
-    GLUquadric* quad = gluNewQuadric();
-    gluQuadricTexture(quad, GL_TRUE);  // Enable texture mapping for the sphere
-    gluSphere(quad, 3.0f, 30, 30);    // Radius 3.0, 30 slices, 30 stacks
+    glTranslatef(20.0f, 20.0f, 15.0f);
+    GLUquadric *quad = gluNewQuadric();
+    gluQuadricTexture(quad, GL_TRUE);
+    gluSphere(quad, 3.0f, 30, 30);
     gluDeleteQuadric(quad);
     glPopMatrix();
 
-    glDisable(GL_TEXTURE_2D); // Disable texture mapping
+    glDisable(GL_TEXTURE_2D);
 }
 
 void initTreePositions() {
-    float spacing = 3.5f;  // Reduced spacing between trees
-    int numTrees = (int)(ROAD_LENGTH / spacing) + 1;  // Calculate number of trees needed
+    float spacing = 3.5f;
+    int numTrees = (int) (ROAD_LENGTH / spacing) + 1;
 
     for (int i = 0; i < numTrees; i++) {
         TreePosition tree;
+
         tree.x = -ROAD_WIDTH / 2 - 2.0f;  // Left side of road
-        tree.y = i * spacing;            // Evenly spaced along the road
+        tree.y = i * spacing; // Evenly spaced along the road
         tree.z = 0.0f;
 
-        // Assign a random scale factor (e.g., between 0.8 and 1.2)
+        // Random scale factor (e.g., between 0.8 and 1.2)
         tree.scaleFactor = 0.8f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.4f));
-
         treePositions.push_back(tree);
     }
 }
 
 void reshapeAndProjection(int w, int h) {
     if (h == 0) h = 1;
-    float ratio = (float)w/h;
+    float ratio = (float) w / h;
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0, 0, w, h);
@@ -116,10 +117,10 @@ void drawRoad() {
     // Main road surface (gray)
     glColor3f(0.4f, 0.4f, 0.4f);
     glBegin(GL_QUADS);
-    glVertex3f(-ROAD_WIDTH/2, -ROAD_LENGTH/2, -3.0f);
-    glVertex3f(ROAD_WIDTH/2, -ROAD_LENGTH/2, -3.0f);
-    glVertex3f(ROAD_WIDTH/2, ROAD_LENGTH/2, -3.0f);
-    glVertex3f(-ROAD_WIDTH/2, ROAD_LENGTH/2, -3.0f);
+    glVertex3f(-ROAD_WIDTH / 2, -ROAD_LENGTH / 2, -3.0f);
+    glVertex3f(ROAD_WIDTH / 2, -ROAD_LENGTH / 2, -3.0f);
+    glVertex3f(ROAD_WIDTH / 2, ROAD_LENGTH / 2, -3.0f);
+    glVertex3f(-ROAD_WIDTH / 2, ROAD_LENGTH / 2, -3.0f);
     glEnd();
 
     // Road divider lines (white)
@@ -129,14 +130,14 @@ void drawRoad() {
     // Draw two sets of lines to ensure seamless looping
     for (int set = 0; set < 2; set++) {
         float offset = set * ROAD_LENGTH;
-        for (float z = -ROAD_LENGTH/2; z < ROAD_LENGTH/2; z += lineSpacing) {
+        for (float z = -ROAD_LENGTH / 2; z < ROAD_LENGTH / 2; z += lineSpacing) {
             float adjustedZ = z + roadOffset + offset;
 
             // Wrap the position if it goes beyond the road length
-            if (adjustedZ > ROAD_LENGTH/2) {
+            if (adjustedZ > ROAD_LENGTH / 2) {
                 adjustedZ -= ROAD_LENGTH;
             }
-            if (adjustedZ < -ROAD_LENGTH/2) {
+            if (adjustedZ < -ROAD_LENGTH / 2) {
                 adjustedZ += ROAD_LENGTH;
             }
 
@@ -197,7 +198,7 @@ void drawChristmasTree(float scaleFactor) {
     // Draw trunk
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, -3.0f);
-    GLUquadricObj* cylinder = gluNewQuadric();
+    GLUquadricObj *cylinder = gluNewQuadric();
     gluQuadricDrawStyle(cylinder, GLU_FILL);
     gluCylinder(cylinder, 0.4f, 0.4f, 1.0f, 20, 20);
     gluDeleteQuadric(cylinder);
@@ -222,6 +223,17 @@ void setupLighting() {
     glLightfv(GL_LIGHT1, GL_POSITION, moonLightPosition);
 }
 
+void setupFog() {
+    GLfloat fogColor[] = {0.5, 0.5, 0.5, 1.0}; // Fog color: light gray
+
+    glFogi(GL_FOG_MODE, GL_EXP); // Fog mode: exponential
+    glFogfv(GL_FOG_COLOR, fogColor); // Set fog color
+    glFogf(GL_FOG_DENSITY, 0.05f); // Reduced fog density (was 0.25)
+    glHint(GL_FOG_HINT, GL_NICEST); // High-quality fog rendering
+    glFogf(GL_FOG_START, 10.0f); // Fog starts farther away
+    glFogf(GL_FOG_END, 100.0f); // Fog ends much farther away
+}
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -234,6 +246,7 @@ void display() {
     gluLookAt(Obsx, Obsy, Obsz, Refx, Refy, Refz, 0.0f, 0.0f, 1.0f);
 
     setupLighting();
+    setupFog();
 
     // Draw the moon
     drawMoon();
@@ -242,7 +255,7 @@ void display() {
     drawRoad();
 
     // Draw trees with seamless wrapping
-    for (const auto& pos : treePositions) {
+    for (const auto &pos: treePositions) {
         for (int set = -1; set <= 1; set++) {
             float yOffset = pos.y + roadOffset + (set * ROAD_LENGTH);
             if (yOffset >= -ROAD_LENGTH / 2 && yOffset <= ROAD_LENGTH * 1.5) {
@@ -255,6 +268,14 @@ void display() {
     }
 
     glutSwapBuffers();
+}
+
+void setSceneColor() {
+    if (fog) {
+        glClearColor(0.5, 0.5, 0.5, 1.0); // Ceata
+    } else {
+        glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
+    }
 }
 
 
@@ -294,6 +315,19 @@ void processNormalKeys(unsigned char key, int x, int y) {
         case '-':
             dist += 0.5;
             break;
+        case 'f':
+        case 'F':
+            fog = !fog;
+
+            if (fog) {
+                glEnable(GL_FOG);
+            } else {
+                glDisable(GL_FOG);
+            }
+
+            setSceneColor();
+            glutPostRedisplay();
+            break;
         case 27:
             exit(0);
             break;
@@ -301,7 +335,7 @@ void processNormalKeys(unsigned char key, int x, int y) {
     glutPostRedisplay();
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
@@ -320,8 +354,8 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(processNormalKeys);
     glutTimerFunc(16, update, 0);
 
+    setSceneColor();
     glEnable(GL_DEPTH_TEST);
-    glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
 
     glutMainLoop();
     return 0;
