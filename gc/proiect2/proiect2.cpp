@@ -2,15 +2,13 @@
 
 #include <iostream>
 #include <GL/freeglut.h>
-#include <cmath>
-#include <vector>
 #include "libs/stb_image.h"
 
 // Camera position
 float Refx = 0.0f, Refy = 0.0f, Refz = 0.0f;
-float alpha = 0.4f;
-float beta = -0.6f;
-float dist = 30.0f;
+float alpha = 0.05f;
+float beta = -1.3f;
+float dist = 26.0f;
 float Obsx, Obsy, Obsz;
 
 // Fog flag
@@ -72,7 +70,7 @@ void drawMoon() {
     glMaterialfv(GL_FRONT, GL_SHININESS, moonShininess);
 
     glPushMatrix();
-    glTranslatef(20.0f, 20.0f, 15.0f);
+    glTranslatef(15.0f, 30.0f, 15.0f);
     GLUquadric *quad = gluNewQuadric();
     gluQuadricTexture(quad, GL_TRUE);
     gluSphere(quad, 3.0f, 30, 30);
@@ -99,16 +97,6 @@ void initTreePositions() {
     }
 }
 
-void reshapeAndProjection(int w, int h) {
-    if (h == 0) h = 1;
-    float ratio = (float) w / h;
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glViewport(0, 0, w, h);
-    gluPerspective(45.0f, ratio, 0.1f, 500.0f);  // Adjusted FOV to 45 degrees
-    glMatrixMode(GL_MODELVIEW);
-}
-
 void drawRoad() {
     // Road surface
     glDisable(GL_LIGHTING);
@@ -125,36 +113,34 @@ void drawRoad() {
 
     // Road divider lines (white)
     glColor3f(1.0f, 1.0f, 1.0f);
+
     float lineSpacing = 5.0f;
+    float offset = 0;
 
-    // Draw two sets of lines to ensure seamless looping
-    for (int set = 0; set < 2; set++) {
-        float offset = set * ROAD_LENGTH;
-        for (float z = -ROAD_LENGTH / 2; z < ROAD_LENGTH / 2; z += lineSpacing) {
-            float adjustedZ = z + roadOffset + offset;
+    for (float z = -ROAD_LENGTH / 2; z < ROAD_LENGTH / 2; z += lineSpacing) {
+        float adjustedZ = z + roadOffset + offset;
 
-            // Wrap the position if it goes beyond the road length
-            if (adjustedZ > ROAD_LENGTH / 2) {
-                adjustedZ -= ROAD_LENGTH;
-            }
-            if (adjustedZ < -ROAD_LENGTH / 2) {
-                adjustedZ += ROAD_LENGTH;
-            }
-
-            glBegin(GL_QUADS);
-            glVertex3f(-0.15f, adjustedZ, -2.99f);
-            glVertex3f(0.15f, adjustedZ, -2.99f);
-            glVertex3f(0.15f, adjustedZ + 3.0f, -2.99f);
-            glVertex3f(-0.15f, adjustedZ + 3.0f, -2.99f);
-            glEnd();
+        // Wrap the position if it goes beyond the road length
+        if (adjustedZ > ROAD_LENGTH / 2) {
+            adjustedZ -= ROAD_LENGTH;
         }
+        if (adjustedZ < -ROAD_LENGTH / 2) {
+            adjustedZ += ROAD_LENGTH;
+        }
+
+        glBegin(GL_QUADS);
+        glVertex3f(-0.15f, adjustedZ, -2.99f);
+        glVertex3f(0.15f, adjustedZ, -2.99f);
+        glVertex3f(0.15f, adjustedZ + 3.0f, -2.99f);
+        glVertex3f(-0.15f, adjustedZ + 3.0f, -2.99f);
+        glEnd();
     }
 
     glPopMatrix();
     glEnable(GL_LIGHTING);
 }
 
-void drawChristmasTree(float scaleFactor) {
+void drawTree(float scaleFactor) {
     // Set tree material (green)
     GLfloat tree_ambient[] = {0.0f, 0.2f, 0.0f, 1.0f};
     GLfloat tree_diffuse[] = {0.0f, 0.6f, 0.0f, 1.0f};
@@ -207,6 +193,32 @@ void drawChristmasTree(float scaleFactor) {
     glPopMatrix(); // Undo scaling
 }
 
+void drawTrees() {
+    for (const auto &pos: treePositions) {
+        for (int set = -1; set <= 1; set++) {
+            float yOffset = pos.y + roadOffset + (set * ROAD_LENGTH);
+
+            if (yOffset >= -ROAD_LENGTH / 2 && yOffset <= ROAD_LENGTH * 0.5) {
+                glPushMatrix();
+                glTranslatef(pos.x, yOffset, pos.z);
+                drawTree(pos.scaleFactor);
+                glPopMatrix();
+            }
+        }
+    }
+}
+
+void reshapeAndProjection(int w, int h) {
+    if (h == 0) h = 1;
+    float ratio = (float) w / h;
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glViewport(0, 0, w, h);
+    gluPerspective(45.0f, ratio, 0.1f, 500.0f);
+    glMatrixMode(GL_MODELVIEW);
+}
+
 void setupLighting() {
     glEnable(GL_LIGHTING); // Enable lighting
     glEnable(GL_LIGHT1);   // Enable the moonlight as the primary light source
@@ -215,7 +227,7 @@ void setupLighting() {
     GLfloat moonLightAmbient[] = {0.5f, 0.5f, 0.5f, 1.0f}; // Stronger ambient light
     GLfloat moonLightDiffuse[] = {1.5f, 1.5f, 1.5f, 1.0f}; // Intense diffuse light
     GLfloat moonLightSpecular[] = {2.0f, 2.0f, 2.0f, 1.0f}; // Bright specular highlights
-    GLfloat moonLightPosition[] = {20.0f, 20.0f, 15.0f, 1.0f}; // Position near the moon
+    GLfloat moonLightPosition[] = {15.0f, 30.0f, 15.0f, 1.0f}; // Position near the moon
 
     glLightfv(GL_LIGHT1, GL_AMBIENT, moonLightAmbient);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, moonLightDiffuse);
@@ -248,24 +260,9 @@ void display() {
     setupLighting();
     setupFog();
 
-    // Draw the moon
-    drawMoon();
-
-    // Draw the road
     drawRoad();
-
-    // Draw trees with seamless wrapping
-    for (const auto &pos: treePositions) {
-        for (int set = -1; set <= 1; set++) {
-            float yOffset = pos.y + roadOffset + (set * ROAD_LENGTH);
-            if (yOffset >= -ROAD_LENGTH / 2 && yOffset <= ROAD_LENGTH * 1.5) {
-                glPushMatrix();
-                glTranslatef(pos.x, yOffset, pos.z);
-                drawChristmasTree(pos.scaleFactor);
-                glPopMatrix();
-            }
-        }
-    }
+    drawMoon();
+    drawTrees();
 
     glutSwapBuffers();
 }
@@ -277,7 +274,6 @@ void setSceneColor() {
         glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
     }
 }
-
 
 void update(int value) {
     roadOffset -= ROAD_SPEED;
@@ -326,8 +322,36 @@ void processNormalKeys(unsigned char key, int x, int y) {
             }
 
             setSceneColor();
-            glutPostRedisplay();
             break;
+
+        // Default camera
+        case '1':
+            alpha = 0.05f;
+            beta = -1.3f;
+            dist = 26.0f;
+            break;
+
+        // Behind trees camera
+        case '2':
+            alpha = 22.05f;
+            beta = 1.0f;
+            dist = 26.0f;
+            break;
+
+        // Top view camera
+        case '3':
+            alpha = 1.57f;
+            beta = 0.0f;
+            dist = 26.0f;
+            break;
+
+        // Front view camera
+        case '4':
+            alpha = 0.0f;
+            beta = -1.57f;
+            dist = 26.0f;
+            break;
+
         case 27:
             exit(0);
             break;
@@ -340,12 +364,10 @@ int main(int argc, char **argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("3D Animated Road Scene with Moonlight");
+    glutCreateWindow("Mihai Tuhari - 3D Project");
 
-    srand(static_cast<unsigned int>(time(0))); // Seed random generator
     initTreePositions();
 
-    // Load the moon texture
     loadTexture(texturePath + "moon.jpg", textureMoon);
 
     glutReshapeFunc(reshapeAndProjection);
