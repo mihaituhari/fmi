@@ -77,8 +77,9 @@ Folositi `sagetile` si tastele `+` si `-` pentru a roti camera si a da zoom in/o
 
 Apasati tastele `1`, `2`, `3`, `4` pentru a schimba intre camerele presetate.
 
-<img src="docs/camera-1.png" width="100"> <img src="docs/camera-2.png" width="100">
-<img src="docs/camera-3.png" width="100"> <img src="docs/camera-4.png" width="100"> 
+<img src="docs/camera-1.png" width="300"> <img src="docs/camera-2.png" width="300">
+
+<img src="docs/camera-3.png" width="300"> <img src="docs/camera-4.png" width="300"> 
 
 ## Ceata 🌫️
 Apasati tasta `F` pentru a activa/dezactiva ceata.
