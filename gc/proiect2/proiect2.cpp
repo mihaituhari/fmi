@@ -25,7 +25,6 @@ GLuint textureMoon;
 const std::string texturePath = "/Volumes/mihai/dev/fmi/gc/proiect2/textures/";
 int width, height, channels;
 
-// Tree positions
 struct TreePosition {
     float x, y, z;
     float scaleFactor;
@@ -33,7 +32,6 @@ struct TreePosition {
 
 std::vector<TreePosition> treePositions;
 
-// Function to load textures
 void loadTexture(const std::string &path, GLuint &textureID) {
     stbi_set_flip_vertically_on_load(1);
     unsigned char *image = stbi_load(path.c_str(), &width, &height, &channels, STBI_rgb_alpha);
@@ -87,9 +85,9 @@ void initTreePositions() {
     for (int i = 0; i < numTrees; i++) {
         TreePosition tree;
 
-        tree.x = -ROAD_WIDTH / 2 - 2.0f;  // Left side of road
-        tree.y = i * spacing; // Evenly spaced along the road
-        tree.z = 0.0f;
+        tree.x = -ROAD_WIDTH / 2 - 2.0f; // Middle of the road
+        tree.y = i * spacing; // Even spacing
+        tree.z = 0.0f; // Road level
 
         // Random scale factor (e.g., between 0.8 and 1.2)
         tree.scaleFactor = 0.8f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.4f));
@@ -120,7 +118,7 @@ void drawRoad() {
     for (float z = -ROAD_LENGTH / 2; z < ROAD_LENGTH / 2; z += lineSpacing) {
         float adjustedZ = z + roadOffset + offset;
 
-        // Wrap the position if it goes beyond the road length
+        // Wrap if exceeding road
         if (adjustedZ > ROAD_LENGTH / 2) {
             adjustedZ -= ROAD_LENGTH;
         }
@@ -141,7 +139,6 @@ void drawRoad() {
 }
 
 void drawTree(float scaleFactor) {
-    // Set tree material (green)
     GLfloat tree_ambient[] = {0.0f, 0.2f, 0.0f, 1.0f};
     GLfloat tree_diffuse[] = {0.0f, 0.6f, 0.0f, 1.0f};
     GLfloat tree_specular[] = {0.0f, 0.1f, 0.0f, 1.0f};
@@ -152,31 +149,33 @@ void drawTree(float scaleFactor) {
     glMaterialfv(GL_FRONT, GL_SPECULAR, tree_specular);
     glMaterialfv(GL_FRONT, GL_SHININESS, tree_shininess);
 
-    // Apply the consistent scaling factor
+    float baseOffset = -(1.0f - scaleFactor) * 3.0f;
+
     glPushMatrix();
+    glTranslatef(0.0f, 0.0f, baseOffset);
     glScalef(scaleFactor, scaleFactor, scaleFactor);
 
-    // Draw bottom cone
+    // Bottom cone
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, -2.0f);
     glutSolidCone(1.5, 3.0, 12, 20);
     glPopMatrix();
 
-    // Draw middle cone
+    // Middle cone
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, -0.5f);
     glutSolidCone(1.2, 2.5, 12, 20);
     glPopMatrix();
 
-    // Draw top cone
+    // Top cone
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, 1.0f);
     glutSolidCone(0.9, 2.0, 12, 20);
     glPopMatrix();
 
-    // Set trunk material (brown)
-    GLfloat trunk_ambient[] = {0.4f, 0.2f, 0.0f, 1.0f};  // Brown ambient
-    GLfloat trunk_diffuse[] = {0.6f, 0.3f, 0.1f, 1.0f};  // Brown diffuse
+    // Trunk material
+    GLfloat trunk_ambient[] = {0.4f, 0.2f, 0.0f, 1.0f};
+    GLfloat trunk_diffuse[] = {0.6f, 0.3f, 0.1f, 1.0f};
 
     glMaterialfv(GL_FRONT, GL_AMBIENT, trunk_ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, trunk_diffuse);
@@ -190,7 +189,7 @@ void drawTree(float scaleFactor) {
     gluDeleteQuadric(cylinder);
     glPopMatrix();
 
-    glPopMatrix(); // Undo scaling
+    glPopMatrix();
 }
 
 void drawTrees() {
@@ -220,10 +219,9 @@ void reshapeAndProjection(int w, int h) {
 }
 
 void setupLighting() {
-    glEnable(GL_LIGHTING); // Enable lighting
-    glEnable(GL_LIGHT1);   // Enable the moonlight as the primary light source
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT1);
 
-    // Enhanced moonlight properties (bright white light)
     GLfloat moonLightAmbient[] = {0.5f, 0.5f, 0.5f, 1.0f}; // Stronger ambient light
     GLfloat moonLightDiffuse[] = {1.5f, 1.5f, 1.5f, 1.0f}; // Intense diffuse light
     GLfloat moonLightSpecular[] = {2.0f, 2.0f, 2.0f, 1.0f}; // Bright specular highlights
@@ -238,18 +236,17 @@ void setupLighting() {
 void setupFog() {
     GLfloat fogColor[] = {0.5, 0.5, 0.5, 1.0}; // Fog color: light gray
 
-    glFogi(GL_FOG_MODE, GL_EXP); // Fog mode: exponential
-    glFogfv(GL_FOG_COLOR, fogColor); // Set fog color
-    glFogf(GL_FOG_DENSITY, 0.05f); // Reduced fog density (was 0.25)
-    glHint(GL_FOG_HINT, GL_NICEST); // High-quality fog rendering
-    glFogf(GL_FOG_START, 10.0f); // Fog starts farther away
-    glFogf(GL_FOG_END, 100.0f); // Fog ends much farther away
+    glFogi(GL_FOG_MODE, GL_EXP);
+    glFogfv(GL_FOG_COLOR, fogColor);
+    glFogf(GL_FOG_DENSITY, 0.05f);
+    glHint(GL_FOG_HINT, GL_NICEST);
+    glFogf(GL_FOG_START, 10.0f);
+    glFogf(GL_FOG_END, 100.0f);
 }
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Update camera position
     Obsx = Refx + dist * cos(alpha) * cos(beta);
     Obsy = Refy + dist * cos(alpha) * sin(beta);
     Obsz = Refz + dist * sin(alpha);
@@ -267,10 +264,12 @@ void display() {
     glutSwapBuffers();
 }
 
-void setSceneColor() {
+void renderAmbient() {
     if (fog) {
-        glClearColor(0.5, 0.5, 0.5, 1.0); // Ceata
+        glEnable(GL_FOG);
+        glClearColor(0.5, 0.5, 0.5, 1.0); // Fog color
     } else {
+        glDisable(GL_FOG);
         glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
     }
 }
@@ -314,42 +313,35 @@ void processNormalKeys(unsigned char key, int x, int y) {
         case 'f':
         case 'F':
             fog = !fog;
-
-            if (fog) {
-                glEnable(GL_FOG);
-            } else {
-                glDisable(GL_FOG);
-            }
-
-            setSceneColor();
+            renderAmbient();
             break;
 
-        // Default camera
+            // Default camera
         case '1':
             alpha = 0.05f;
             beta = -1.3f;
             dist = 26.0f;
             break;
 
-        // Behind trees camera
+            // Top view camera
         case '2':
-            alpha = 22.05f;
-            beta = 1.0f;
-            dist = 26.0f;
-            break;
-
-        // Top view camera
-        case '3':
             alpha = 1.57f;
             beta = 0.0f;
             dist = 26.0f;
             break;
 
-        // Front view camera
-        case '4':
+            // Front view camera
+        case '3':
             alpha = 0.0f;
             beta = -1.57f;
-            dist = 26.0f;
+            dist = 60.0f;
+            break;
+
+            // Behind trees camera
+        case '4':
+            alpha = 0.1f;
+            beta = -2.3f;
+            dist = 30.0f;
             break;
 
         case 27:
@@ -376,7 +368,7 @@ int main(int argc, char **argv) {
     glutKeyboardFunc(processNormalKeys);
     glutTimerFunc(16, update, 0);
 
-    setSceneColor();
+    renderAmbient();
     glEnable(GL_DEPTH_TEST);
 
     glutMainLoop();
