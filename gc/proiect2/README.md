@@ -51,7 +51,7 @@ Pentru manipularea texturilor am ales STB in loc de SOIL pentru ca pe MacOS SOIL
 
 Textura folosita pentru luna se regaseste in folderul [textures](textures):
 
-<img src="textures/moon.jpg" width="100">
+![moon-texture](textures/moon.jpg)
 
 ## Copacii 🌲
 Brazii de pe marginea drumului sunt realizati fiecare din catre 3 conuri si un cilindru pentru trunchi.
