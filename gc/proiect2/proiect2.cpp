@@ -1,3 +1,9 @@
+/**
+ * Project 2 - 3D Scene
+ *
+ * @author Mihai Tuhari
+ * @date January 2025
+ */
 #define STB_IMAGE_IMPLEMENTATION
 
 #include <iostream>
