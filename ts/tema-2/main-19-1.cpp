@@ -8,6 +8,8 @@
 /*
  * Metoda 1: Generare Beta(a, b) folosind Gamma
  *
+ * Curs 6, pag. 2-3
+ *
  * Teorie:
  * Conform teoremei, daca X1 ~ Gamma(a, 1) si X2 ~ Gamma(b, 1) sunt variabile aleatoare independente,
  * atunci variabila aleatoare X = X1 / (X1 + X2) urmeaza o distributie Beta(a, b).
@@ -21,6 +23,8 @@ double generateBetaGamma(double a, double b, std::mt19937 &gen) {
 
 /*
  * Metoda 2: Generare Beta(a, b) folosind statistici de ordine
+ *
+ * Curs 6, pagina 5
  *
  * Teorie:
  * Daca U1, U2, ..., Un sunt variabile aleatoare independente si uniforme pe [0, 1], iar n = a + b - 1,
@@ -40,17 +44,20 @@ double generateBetaOrderStatistics(int a, int b, std::mt19937 &gen) {
     // Sortam valorile
     std::sort(uValues.begin(), uValues.end());
 
-    // Returnam a-1 statistica de ordine
+    // Returnam a-1 statistica de ordine (indexul incepe de la 0)
     return uValues[a - 1];
 }
 
+/**
+ * Sa se genereze variabila `Beta(3, 5)` prin doua metode (curs 6).
+ */
 int main() {
     double a = 3.0;
     double b = 5.0;
     int sampleSize = 1000;
 
-    double expectedMean = a / (a + b);
-    double expectedVariance = (a * b) / ((a + b) * (a + b) * (a + b + 1));
+    double expectedMean = a / (a + b); // Media asteptata
+    double expectedVariance = (a * b) / ((a + b) * (a + b) * (a + b + 1)); // Dispersia asteptata
 
     // Seed pentru generatorul de numere aleatoare
     std::random_device rd;
@@ -77,10 +84,8 @@ int main() {
     std::cout << "----------------------------------------------------------------------" << std::endl;
     std::cout << "|                       | General      | Metoda 1     | Metoda 2     |" << std::endl;
     std::cout << "----------------------------------------------------------------------" << std::endl;
-    std::cout << "| Media                 | " << expectedMean << " | " << meanGamma << " | " << meanOrderStatistics
-              << " |" << std::endl;
-    std::cout << "| Dispersia de selectie | " << expectedVariance << " | " << varianceGamma << " | "
-              << varianceOrderStatistics << " |" << std::endl;
+    std::cout << "| Media                 | " << expectedMean << " | " << meanGamma << " | " << meanOrderStatistics << " |" << std::endl;
+    std::cout << "| Dispersia de selectie | " << expectedVariance << " | " << varianceGamma << " | " << varianceOrderStatistics << " |" << std::endl;
     std::cout << "----------------------------------------------------------------------" << std::endl;
 
     return 0;
