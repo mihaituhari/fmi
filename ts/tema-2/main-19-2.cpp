@@ -9,9 +9,11 @@
  * Metoda 1: Generare variabila geometrica folosind algoritmul Pascal
  *
  * Curs 7, pag. 2-3
+ *
  * Teorie:
  * Generam variabile Bernoulli repetate pana la primul succes.
  * Conform algoritmului Pascal, numaram numarul de esecuri pana la aparitia unui succes.
+ * Programul folosește o distribuție Bernoulli repetata pentru a numara eșecurile pana la apariția unui succes.
  */
 int generateGeometricPascal(double p, std::mt19937 &gen) {
     std::bernoulli_distribution bernoulliDist(p);
@@ -36,11 +38,14 @@ int generateGeometricPascal(double p, std::mt19937 &gen) {
 int generateGeometricInverse(double p, std::mt19937 &gen) {
     std::uniform_real_distribution<> uniformDist(0.0, 1.0);
     double u = uniformDist(gen);
+
     return static_cast<int>(std::log(u) / std::log(1.0 - p));
 }
 
 /**
  * Sa se genereze variabila geometrica prin doua metode (curs 7).
+ *
+ * Ambele metode sunt validate prin compararea mediilor si dispersiei obținute cu cele teoretice
  */
 int main() {
     double p = 0.3; // Probabilitatea de succes

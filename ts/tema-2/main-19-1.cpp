@@ -13,7 +13,10 @@
  * Teorie:
  * Conform teoremei, daca X1 ~ Gamma(a, 1) si X2 ~ Gamma(b, 1) sunt variabile aleatoare independente,
  * atunci variabila aleatoare X = X1 / (X1 + X2) urmeaza o distributie Beta(a, b).
+ *
  * Aceasta metoda implica generarea a doua variabile Gamma si calcularea raportului lor.
+ *
+ * In cazul nostru, a = 3 si b = 5.
  */
 double generateBetaGamma(double a, double b, std::mt19937 &gen) {
     double x1 = Helper::generateGamma(a, gen);
@@ -30,6 +33,8 @@ double generateBetaGamma(double a, double b, std::mt19937 &gen) {
  * Daca U1, U2, ..., Un sunt variabile aleatoare independente si uniforme pe [0, 1], iar n = a + b - 1,
  * atunci statisticile de ordine U(1) < U(2) < ... < U(n) satisfac U(a) ~ Beta(a, b).
  * Aceasta metoda implica generarea de n variabile uniforme, sortarea lor si returnarea a-1 statisticii de ordine.
+ *
+ * In cazul nostru, U(3) este distribuita pe Beta(3, 5).
  */
 double generateBetaOrderStatistics(int a, int b, std::mt19937 &gen) {
     int n = a + b - 1;
@@ -50,6 +55,8 @@ double generateBetaOrderStatistics(int a, int b, std::mt19937 &gen) {
 
 /**
  * Sa se genereze variabila `Beta(3, 5)` prin doua metode (curs 6).
+ *
+ * Rezultatele ambelor metode sunt comparate cu media și dispersia teoretică pentru a valida generatorii.
  */
 int main() {
     double a = 3.0;
