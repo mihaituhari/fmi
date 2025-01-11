@@ -20,6 +20,14 @@ float Obsx, Obsy, Obsz;
 // Fog flag
 bool fog = false;
 
+// Stars
+const int NUM_STARS = 200;
+struct Star {
+    float x, y, z;
+    float brightness;
+};
+std::vector<Star> stars;
+
 // Road elements
 float roadOffset = 0.0f;
 const float ROAD_SPEED = 0.1f;
@@ -31,11 +39,11 @@ GLuint textureMoon;
 const std::string texturePath = "/Volumes/mihai/dev/fmi/gc/proiect2/textures/";
 int width, height, channels;
 
+// Trees
 struct TreePosition {
     float x, y, z;
     float scaleFactor;
 };
-
 std::vector<TreePosition> treePositions;
 
 void loadTexture(const std::string &path, GLuint &textureID) {
@@ -213,6 +221,43 @@ void initTreePositions() {
     }
 }
 
+void initStarPositions() {
+    stars.resize(NUM_STARS);
+
+    for (auto &star: stars) {
+        // Create a dome of stars
+        float theta = static_cast<float>(rand()) / RAND_MAX * 2 * M_PI;
+        float phi = static_cast<float>(rand()) / RAND_MAX * M_PI / 2.5f; // Limit to upper hemisphere
+        float radius = 100.0f; // Distance from center
+
+        star.x = radius * cos(phi) * cos(theta);
+        star.y = radius * cos(phi) * sin(theta);
+        star.z = radius * sin(phi);
+
+        // Random initial brightness
+        star.brightness = 0.5f + static_cast<float>(rand()) / RAND_MAX * 0.5f;
+    }
+}
+
+void drawStars() {
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
+
+    glPointSize(2.0f);
+    glBegin(GL_POINTS);
+
+    for (auto &star: stars) {
+        // Make stars twinkle by slightly varying brightness
+        float twinkle = star.brightness * (0.85f + (static_cast<float>(rand()) / RAND_MAX) * 0.3f);
+        glColor3f(twinkle, twinkle, twinkle);
+        glVertex3f(star.x, star.y, star.z);
+    }
+
+    glEnd();
+
+    glEnable(GL_LIGHTING);
+}
+
 void reshapeAndProjection(int w, int h) {
     if (h == 0) h = 1;
     float ratio = (float) w / h;
@@ -274,6 +319,7 @@ void display() {
     setupFog();
 
     drawRoad();
+    drawStars();
     drawMoon();
     drawTrees();
 
@@ -364,6 +410,7 @@ int main(int argc, char **argv) {
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Mihai Tuhari - 3D Project");
 
+    initStarPositions();
     initTreePositions();
 
     loadTexture(texturePath + "moon.jpg", textureMoon);
