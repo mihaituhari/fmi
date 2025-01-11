@@ -8,7 +8,7 @@
 /*
  * Metoda 1: Generare variabila geometrica folosind algoritmul Pascal
  *
- * Curs 7, pag. 2-3
+ * Curs 7, pag. 10-11
  *
  * Teorie:
  * Generam variabile Bernoulli repetate pana la primul succes.
@@ -39,7 +39,7 @@ int generateGeometricInverse(double p, std::mt19937 &gen) {
     std::uniform_real_distribution<> uniformDist(0.0, 1.0);
     double u = uniformDist(gen);
 
-    return static_cast<int>(std::log(u) / std::log(1.0 - p));
+    return static_cast<int>(std::floor(std::log(u) / std::log(1.0 - p)));
 }
 
 /**
