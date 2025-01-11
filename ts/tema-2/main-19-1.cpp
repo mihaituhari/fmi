@@ -56,6 +56,13 @@ double generateBetaOrderStatistics(int a, int b, std::mt19937 &gen) {
 /**
  * Sa se genereze variabila `Beta(3, 5)` prin doua metode (curs 6).
  *
+ * Distributia Beta este o distributie continua definita pe intervalul [0,1].
+ * Are o forma controlata de doi parametri pozitivi a si b (in cazul nostru 3 si 5) numiti parametrii de forma.
+ *
+ * Metodele alese:
+ * 1. Generare folosind variabile Gamma
+ * 2. Generare folosind statistici de ordine
+ *
  * Rezultatele ambelor metode sunt comparate cu media și dispersia teoretică pentru a valida generatorii.
  */
 int main() {

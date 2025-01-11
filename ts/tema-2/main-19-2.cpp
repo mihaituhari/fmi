@@ -45,6 +45,10 @@ int generateGeometricInverse(double p, std::mt19937 &gen) {
 /**
  * Sa se genereze variabila geometrica prin doua metode (curs 7).
  *
+ * Metodele alese:
+ * 1. Metoda Pascal
+ * 2. Metoda inversa
+ *
  * Ambele metode sunt validate prin compararea mediilor si dispersiei obținute cu cele teoretice
  */
 int main() {
