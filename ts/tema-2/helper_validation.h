@@ -3,6 +3,8 @@
 
 namespace Helper {
     // Functie pentru generarea unei variabile aleatoare Gamma(a, 1)
+    // - a: parametrul de forma al distributiei Gamma
+    // - 1: scala distributiei Gamma
     // Formula: X ~ Gamma(a, 1) => X = suma a variabilelor independente si identic distribuite exponential(1)
     double generateGamma(double a, std::mt19937 &gen) {
         std::gamma_distribution<> gammaDist(a, 1.0);

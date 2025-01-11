@@ -21,6 +21,7 @@
 double generateBetaGamma(double a, double b, std::mt19937 &gen) {
     double x1 = Helper::generateGamma(a, gen);
     double x2 = Helper::generateGamma(b, gen);
+
     return x1 / (x1 + x2);
 }
 
@@ -63,7 +64,7 @@ double generateBetaOrderStatistics(int a, int b, std::mt19937 &gen) {
  * 1. Generare folosind variabile Gamma
  * 2. Generare folosind statistici de ordine
  *
- * Rezultatele ambelor metode sunt comparate cu media și dispersia teoretică pentru a valida generatorii.
+ * Ambele metode sunt validate prin compararea mediilor si dispersiei obținute cu cele teoretice
  */
 int main() {
     double a = 3.0;
