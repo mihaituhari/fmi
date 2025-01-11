@@ -223,10 +223,10 @@ void drawTrees() {
 void initStarPositions() {
     stars.resize(NUM_STARS);
 
+    // Create a dome of stars
     for (auto &star: stars) {
-        // Create a dome of stars
-        float theta = static_cast<float>(rand()) / RAND_MAX * 2 * M_PI;
-        float phi = static_cast<float>(rand()) / RAND_MAX * M_PI / 2.5f; // Limit to upper hemisphere
+        float theta = static_cast<float>(rand()) / RAND_MAX * 2 * M_PI; // Azimuthal angle (rotation around the vertical axis)
+        float phi = static_cast<float>(rand()) / RAND_MAX * M_PI / 2.5f; // Polar angle (limit to upper hemisphere, above horizon)
         float radius = 100.0f; // Distance from center
 
         star.x = radius * cos(phi) * cos(theta);

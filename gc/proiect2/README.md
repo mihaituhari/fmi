@@ -109,4 +109,4 @@ evita combinatia intre termeni in limba Romana si Engleza.
 ### Video
 Mai jos este un video cu animatia in actiune:
 
-https://github.com/user-attachments/assets/845725d7-fcbc-42aa-a73c-4dbae88b6a3f
+https://github.com/user-attachments/assets/2f2f8c63-0511-4e7c-a036-5b043ae0e2ed
