@@ -84,23 +84,6 @@ void drawMoon() {
     glDisable(GL_TEXTURE_2D);
 }
 
-void initTreePositions() {
-    float spacing = 3.5f;
-    int numTrees = (int) (ROAD_LENGTH / spacing) + 1;
-
-    for (int i = 0; i < numTrees; i++) {
-        TreePosition tree;
-
-        tree.x = -ROAD_WIDTH / 2 - 2.0f; // Middle of the road
-        tree.y = i * spacing; // Even spacing
-        tree.z = 0.0f; // Road level
-
-        // Random scale factor (e.g., between 0.8 and 1.2)
-        tree.scaleFactor = 0.8f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.4f));
-        treePositions.push_back(tree);
-    }
-}
-
 void drawRoad() {
     // Road surface
     glDisable(GL_LIGHTING);
@@ -213,6 +196,23 @@ void drawTrees() {
     }
 }
 
+void initTreePositions() {
+    float spacing = 3.5f;
+    int numTrees = (int) (ROAD_LENGTH / spacing) + 1;
+
+    for (int i = 0; i < numTrees; i++) {
+        TreePosition tree;
+
+        tree.x = -ROAD_WIDTH / 2 - 2.0f; // Middle of the road
+        tree.y = i * spacing; // Even spacing
+        tree.z = 0.0f; // Road level
+
+        // Random scale factor (e.g., between 0.8 and 1.2)
+        tree.scaleFactor = 0.8f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.4f));
+        treePositions.push_back(tree);
+    }
+}
+
 void reshapeAndProjection(int w, int h) {
     if (h == 0) h = 1;
     float ratio = (float) w / h;
@@ -250,6 +250,16 @@ void setupFog() {
     glFogf(GL_FOG_END, 100.0f);
 }
 
+void renderAmbient() {
+    if (fog) {
+        glEnable(GL_FOG);
+        glClearColor(0.5, 0.5, 0.5, 1.0); // Fog color
+    } else {
+        glDisable(GL_FOG);
+        glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
+    }
+}
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -268,16 +278,6 @@ void display() {
     drawTrees();
 
     glutSwapBuffers();
-}
-
-void renderAmbient() {
-    if (fog) {
-        glEnable(GL_FOG);
-        glClearColor(0.5, 0.5, 0.5, 1.0); // Fog color
-    } else {
-        glDisable(GL_FOG);
-        glClearColor(0.1f, 0.1f, 0.2f, 1.0f); // Dusk-like background color
-    }
 }
 
 void update(int value) {
