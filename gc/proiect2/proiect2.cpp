@@ -21,7 +21,7 @@ float Obsx, Obsy, Obsz;
 bool fog = false;
 
 // Stars
-const int NUM_STARS = 200;
+const int NUM_STARS = 500;
 struct Star {
     float x, y, z;
     float brightness;
@@ -189,6 +189,22 @@ void drawTree(float scaleFactor) {
     glPopMatrix();
 }
 
+void drawStars() {
+    glDisable(GL_LIGHTING);
+    glDisable(GL_TEXTURE_2D);
+
+    glPointSize(2.0f);
+    glBegin(GL_POINTS);
+
+    for (auto &star: stars) {
+        glColor3f(star.brightness, star.brightness, star.brightness);
+        glVertex3f(star.x, star.y, star.z);
+    }
+
+    glEnd();
+    glEnable(GL_LIGHTING);
+}
+
 void drawTrees() {
     for (const auto &pos: treePositions) {
         for (int set = -1; set <= 1; set++) {
@@ -201,6 +217,22 @@ void drawTrees() {
                 glPopMatrix();
             }
         }
+    }
+}
+
+void initStarPositions() {
+    stars.resize(NUM_STARS);
+
+    for (auto &star: stars) {
+        // Create a dome of stars
+        float theta = static_cast<float>(rand()) / RAND_MAX * 2 * M_PI;
+        float phi = static_cast<float>(rand()) / RAND_MAX * M_PI / 2.5f; // Limit to upper hemisphere
+        float radius = 100.0f; // Distance from center
+
+        star.x = radius * cos(phi) * cos(theta);
+        star.y = radius * cos(phi) * sin(theta);
+        star.z = radius * sin(phi);
+        star.brightness = 0.5f + static_cast<float>(rand()) / RAND_MAX * 0.5f;
     }
 }
 
@@ -219,43 +251,6 @@ void initTreePositions() {
         tree.scaleFactor = 0.8f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.4f));
         treePositions.push_back(tree);
     }
-}
-
-void initStarPositions() {
-    stars.resize(NUM_STARS);
-
-    for (auto &star: stars) {
-        // Create a dome of stars
-        float theta = static_cast<float>(rand()) / RAND_MAX * 2 * M_PI;
-        float phi = static_cast<float>(rand()) / RAND_MAX * M_PI / 2.5f; // Limit to upper hemisphere
-        float radius = 100.0f; // Distance from center
-
-        star.x = radius * cos(phi) * cos(theta);
-        star.y = radius * cos(phi) * sin(theta);
-        star.z = radius * sin(phi);
-
-        // Random initial brightness
-        star.brightness = 0.5f + static_cast<float>(rand()) / RAND_MAX * 0.5f;
-    }
-}
-
-void drawStars() {
-    glDisable(GL_LIGHTING);
-    glDisable(GL_TEXTURE_2D);
-
-    glPointSize(2.0f);
-    glBegin(GL_POINTS);
-
-    for (auto &star: stars) {
-        // Make stars twinkle by slightly varying brightness
-        float twinkle = star.brightness * (0.85f + (static_cast<float>(rand()) / RAND_MAX) * 0.3f);
-        glColor3f(twinkle, twinkle, twinkle);
-        glVertex3f(star.x, star.y, star.z);
-    }
-
-    glEnd();
-
-    glEnable(GL_LIGHTING);
 }
 
 void reshapeAndProjection(int w, int h) {
@@ -368,28 +363,28 @@ void processNormalKeys(unsigned char key, int x, int y) {
             renderAmbient();
             break;
 
-            // Default camera
+        // Default camera
         case '1':
             alpha = 0.05f;
             beta = -1.3f;
             dist = 26.0f;
             break;
 
-            // Top view camera
+        // Top view camera
         case '2':
             alpha = 1.57f;
             beta = 0.0f;
             dist = 26.0f;
             break;
 
-            // Front view camera
+        // Front view camera
         case '3':
             alpha = 0.0f;
             beta = -1.57f;
             dist = 60.0f;
             break;
 
-            // Behind trees camera
+        // Behind trees camera
         case '4':
             alpha = 0.1f;
             beta = -2.3f;
