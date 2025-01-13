@@ -4,6 +4,8 @@
 ## Cerinta
 Realizati o scena 3D complexa.
 
+🌲🌲🌲🌲 🛣️ 🌕✨
+
 ### Precizari cerinta
 
 1. Aplicatia este insotita de o scurta documentatie. In documentatie vor fi
@@ -38,7 +40,7 @@ La sfarsit regasiti si un video.
 Am realizat o simulare a unui drum in miscare. Soseaua are marcaj rutier pe mijloc, iar pe marginea drumului sunt copaci
 de diverse dimensiuni ce se misca cu aceeasi viteza.
 
-Se mai poate distinge luna din coltul scenei.
+Se mai poate distinge luna din coltul scenei, impreuna cu multe stele pe fundal.
 
 Programul principal este in fisierul [proiect2.cpp](proiect2.cpp) si foloseste [libraria STB](libs/stb_image.h) pentru incarcarea texturii pentru luna.
 
@@ -59,6 +61,14 @@ Pentru dinamism si originalitate, fiecare copac are aplicat un factor de scalare
 
 ## Luna 🌕
 Luna este o sfera cu o textura aplicata, impreuna cu setari pentru iluminare puternica.
+
+## Stelele ✨
+Cu ajutorul unei constante `NUM_STARS` si a doua functii dedicate, se genereaza 200 de stele pe cer, sub forma de dom.
+
+Fiecare stea are aceeasi distanta de centru dar restul de atribute sunt generate diferit:
+- Intensitate: baza de 0.5 + o valoarea arbitrara intre 0 si 0.5
+- Unghiul azimutal (theta): aleatoriu (rotatie in jurul axei verticale)
+- Unghiul polar (phi): aleatoriu in emisfera nordica, deasupra liniei orizontului
 
 ## Marcajul rutier 🛣️
 Acesta este format din dreptunghiuri albe cu o anumita distanta intre ele.
