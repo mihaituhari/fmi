@@ -1,4 +1,4 @@
-# Proiect 2 / 2D
+# Proiect 2 / 3D
 #### Ianuarie 2025 / Mihai Tuhari
 
 ## Cerinta
