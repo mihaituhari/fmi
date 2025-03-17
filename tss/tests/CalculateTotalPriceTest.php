@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Testare Funcțională - calculateTotalPrice
+ * Testare Funcțională - calculateTotalPrice.
  */
 class CalculateTotalPriceTest extends TestCase
 {
