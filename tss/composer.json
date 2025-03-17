@@ -1,0 +1,24 @@
+{
+  "name": "mihaituhari/tss",
+  "description": "TSS / Proiect pentru testarea unitara in PHP",
+  "type": "project",
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ]
+  },
+  "require": {
+    "php": ">=8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.0"
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
