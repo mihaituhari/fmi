@@ -1,0 +1,9 @@
+# OS and Ide
+.DS_Store
+.Thumbs.db
+.project
+.settings
+.buildpath
+.pydevproject
+.idea
+.vscode
