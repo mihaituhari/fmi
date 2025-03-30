@@ -7,11 +7,6 @@ class CalculateTotalPriceTest extends TestCase
 {
     protected InventoryManager $inventoryManager;
 
-    protected function setUp(): void
-    {
-        $this->inventoryManager = new InventoryManager();
-    }
-
     public function testCalculateTotalPriceWithValidValues(): void
     {
         $result = $this->inventoryManager->calculateTotalPrice(10, 5);

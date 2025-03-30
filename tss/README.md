@@ -43,6 +43,16 @@ Process Order
 OK (10 tests, 18 assertions)
 ```
 
+## 🛠️ Testare cu coverage
+
+Pentru a rula testele cu acoperire este necesar de instalat Xdebug.
+
+Apoi se rulează comanda `composer test-coverage` (care de fapt rulează `vendor/bin/phpunit --coverage-html coverage-html --coverage-text`).
+Ulterior, consultati `coverage-html/index.html` pentru a vizualiza acoperirea testelor.
+
+![coverage-example-html](docs/coverage-example-html.png)
+
+![coverage-example-output](docs/coverage-example-output.png)
 
 ## 📌 Funcționalități Implementate
 
