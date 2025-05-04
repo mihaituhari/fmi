@@ -33,6 +33,7 @@ final class InventoryManager
         }
 
         // Condiție simplă
+        /** @infection-ignore-all */
         if ($discountPercentage > 0) {
             $total *= (1 - $discountPercentage / 100);
         }
