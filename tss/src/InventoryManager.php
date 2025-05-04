@@ -3,7 +3,7 @@
 /**
  * Clasa care conține funcții pentru un backend PHP
  */
-class InventoryManager
+final class InventoryManager
 {
     /**
      * Calculează prețul total al unui produs în funcție de cantitate și aplicând discount.

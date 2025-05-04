@@ -17,11 +17,13 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^10.0",
-    "phpstan/phpstan": "^2.1"
+    "phpstan/phpstan": "^2.1",
+    "vimeo/psalm": "^6.10"
   },
   "scripts": {
     "test": "phpunit",
     "test-coverage": "phpunit --coverage-html coverage-html --coverage-text",
-    "static-analysis": "phpstan analyse --level max src tests"
+    "static-phpstan": "phpstan analyse --level max src tests",
+    "static-psalm": "psalm"
   }
 }

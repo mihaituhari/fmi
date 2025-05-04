@@ -6,6 +6,20 @@ funcționalități și testele unitare asociate.
 Testele sunt scrise folosind PHPUnit și acoperă atât **testarea funcțională**,
 cât și **testarea structurală**, conform cerințelor cursului *Testarea Sistemelor Software*.
 
+## 🚀 TL;DR
+
+Pentru a rula toate verificările dintr-un singur pas, execută:
+
+```sh
+./test.sh
+```
+
+Scriptul va rula:
+- ✅ testele unitare cu acoperire (`composer test-coverage`)
+- 🔍 analiza statică cu PHPStan (`composer static-analysis`)
+- 🔎 analiza statică cu Psalm (`composer static-psalm`)
+
+-------
 
 ## 🛠️ Configurare și rulare
 
@@ -82,8 +96,17 @@ Ulterior, consultati `coverage-html/index.html` pentru a vizualiza acoperirea te
 Pentru a analiza codul sursă folosind [PHPStan](https://phpstan.org/), rulează:
 
 ```sh
-composer static-analysis
+composer static-phpstan
 ```
 Aceasta comandă va analiza fișierele din `src/` și `tests/` la nivel maxim (`--level max`).
 
 ![phpstan-example](docs/phpstan.png)
+
+
+Pentru a verifica codul și cu [Psalm](https://psalm.dev/, rulează:
+
+```ssh
+composer static-psalm
+```
+
+Aceasta comandă va executa analiza statică folosind configurarea definită în fișierul `psalm.xml`.
