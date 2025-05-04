@@ -7,6 +7,12 @@ class CalculateTotalPriceTest extends TestCase
 {
     protected InventoryManager $inventoryManager;
 
+    public function testCalculateTotalPriceWithZeroUnitPrice(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->inventoryManager->calculateTotalPrice(0, 5);
+    }
+
     public function testCalculateTotalPriceWithValidValues(): void
     {
         $result = $this->inventoryManager->calculateTotalPrice(10, 5);
@@ -46,5 +52,11 @@ class CalculateTotalPriceTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->inventoryManager->calculateTotalPrice(10, 5, 101);
+    }
+
+    public function testCalculateTotalPriceWithZeroDiscount(): void
+    {
+        $result = $this->inventoryManager->calculateTotalPrice(10, 5, 0);
+        $this->assertEquals(50, $result);
     }
 }

@@ -30,4 +30,14 @@ else
   exit 1
 fi
 
+echo -e "\n🧬 Running Mutation Testing with Infection...\n"
+composer mutation
+
+if [ $? -eq 0 ]; then
+  echo -e "\n✅ Infection mutation testing passed!\n"
+else
+  echo -e "\n❌ Infection found undetected mutants!\n"
+  exit 1
+fi
+
 echo -e "\n🎉 All checks passed successfully!"

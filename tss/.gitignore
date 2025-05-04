@@ -3,3 +3,5 @@ vendor/
 coverage/
 coverage.txt
 coverage-html/
+infection-log.txt
+infection-summary.txt

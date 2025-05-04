@@ -25,6 +25,15 @@ class ProcessOrderTest extends TestCase
         $this->assertEquals($inventory, $result['updatedInventory']);
     }
 
+    public function testProcessOrderWithExactStock(): void
+    {
+        $inventory = ['prod1' => 5];
+        $result = $this->inventoryManager->processOrder($inventory, 'prod1', 5);
+
+        $this->assertTrue($result['success']);
+        $this->assertEquals(['prod1' => 0], $result['updatedInventory']);
+    }
+
     public function testProcessOrderSuccessful(): void
     {
         $inventory = ['prod1' => 10, 'prod2' => 5];

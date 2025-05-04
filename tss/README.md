@@ -18,6 +18,7 @@ Scriptul va rula:
 - ✅ testele unitare cu acoperire (`composer test-coverage`)
 - 🔍 analiza statică cu PHPStan (`composer static-analysis`)
 - 🔎 analiza statică cu Psalm (`composer static-psalm`)
+- 🧬 mutation testing cu Infection (`composer mutation`)
 
 -------
 
@@ -90,6 +91,21 @@ Ulterior, consultati `coverage-html/index.html` pentru a vizualiza acoperirea te
 |---------------------|--------------------------------------------------------------------------------------------|
 | calculateTotalPrice | Valori valide, discount 0%, discount 100%, limite cantitate 0, excepții parametri negativi |
 | processOrder        | Produs inexistent, stoc insuficient, comandă validă, comandă cu  0 bucăți                  |
+
+
+## 🧬 Mutation Testing cu Infection
+
+Pentru a testa calitatea testelor prin *mutation testing*, folosește [infection/infection](https://infection.github.io/):
+
+Rulează Infection cu comanda:
+
+```sh
+composer mutation
+```
+
+Infection va raporta dacă testele tale detectează modificări introduse în mod intenționat în cod (mutanți).
+
+Logurile vor fi salvate în `infection-log.txt` și `infection-summary.txt`.
 
 ## 👨‍💻 Analiză Statică
 

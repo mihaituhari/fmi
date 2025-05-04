@@ -21,7 +21,7 @@ final class InventoryManager
     public function calculateTotalPrice(float $unitPrice, int $quantity, int $discountPercentage = 0): float
     {
         // Validare parametri (condiție compusă)
-        if ($unitPrice < 0 || $quantity < 0 || $discountPercentage < 0 || $discountPercentage > 100) {
+        if ($unitPrice <= 0 || $quantity < 0 || $discountPercentage < 0 || $discountPercentage > 100) {
             throw new InvalidArgumentException("Parametrii trebuie să fie pozitivi și discount-ul între 0 și 100");
         }
 
