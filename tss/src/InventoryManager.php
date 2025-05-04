@@ -47,11 +47,11 @@ class InventoryManager
      * - Conține if cu else și if fără else
      * - Conține instrucțiune repetitivă (while)
      *
-     * @param array $inventory Stocul curent
+     * @param array<string,int> $inventory Stocul curent
      * @param string $productId ID-ul produsului
      * @param int $requestedQuantity Cantitatea solicitată
      *
-     * @return array Stocul actualizat și un mesaj de status
+     * @return array{success: bool, message: string, updatedInventory: array<string,int>} Stocul actualizat și un mesaj de status
      */
     public function processOrder(array $inventory, string $productId, int $requestedQuantity): array
     {

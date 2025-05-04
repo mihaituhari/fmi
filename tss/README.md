@@ -76,3 +76,14 @@ Ulterior, consultati `coverage-html/index.html` pentru a vizualiza acoperirea te
 |---------------------|--------------------------------------------------------------------------------------------|
 | calculateTotalPrice | Valori valide, discount 0%, discount 100%, limite cantitate 0, excepții parametri negativi |
 | processOrder        | Produs inexistent, stoc insuficient, comandă validă, comandă cu  0 bucăți                  |
+
+## 👨‍💻 Analiză Statică
+
+Pentru a analiza codul sursă folosind [PHPStan](https://phpstan.org/), rulează:
+
+```sh
+composer static-analysis
+```
+Aceasta comandă va analiza fișierele din `src/` și `tests/` la nivel maxim (`--level max`).
+
+![phpstan-example](docs/phpstan.png)
