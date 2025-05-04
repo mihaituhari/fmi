@@ -103,7 +103,7 @@ Aceasta comandă va analiza fișierele din `src/` și `tests/` la nivel maxim (`
 ![phpstan-example](docs/phpstan.png)
 
 
-Pentru a verifica codul și cu [Psalm](https://psalm.dev/, rulează:
+Pentru a verifica codul și cu [Psalm](https://psalm.dev/), rulează:
 
 ```ssh
 composer static-psalm
